@@ -1,0 +1,287 @@
+File Name	Matrix Number	Cell Count	Name	Universe
+01	P1	1	TOTAL POPULATION	Total population
+01	P2	6	URBAN AND RURAL (FINAL NATIONAL FILE ONLY)	Total population
+01	P3	71	RACE	Total population
+01	P4	73	HISPANIC OR LATINO, AND NOT HISPANIC OR LATINO BY RACE	Total population
+01	P5	71	RACE FOR THE POPULATION 18 YEARS AND OVER	Total population 18 years and over
+02	P6	73	HISPANIC OR LATINO, AND NOT HISPANIC OR LATINO BY RACE FOR THE POPULATION 18 YEARS AND OVER	Total population 18 years and over
+02	P7	8	RACE	Total population
+02	P8	17	HISPANIC OR LATINO BY RACE	Total population
+02	P9	7	RACE (TOTAL RACES TALLIED)	Total races tallied
+02	P10	15	HISPANIC OR LATINO BY RACE (TOTAL RACES TALLIED)	Total races tallied
+02	P11	1	HISPANIC OF LATINO	People who are Hispanic or Latino
+02	P12	49	SEX BY AGE	Total population
+02	P13	3	MEDIAN AGE BY SEX	Total population
+02	P14	43	SEX BY AGE FOR THE POPULATION UNDER 20 YEARS	Population under 20 years
+02	P15	1	HOUSEHOLDS	Households
+02	P16	1	POPULATION IN HOUSEHOLDS	Population in households
+02	P17	1	AVERAGE HOUSEHOLD SIZE	Households
+02	P18	19	HOUSEHOLD SIZE, HOUSEHOLD TYPE, AND PRESENCE OF OWN CHILDREN	Households
+03	P19	19	HOUSEHOLDS BY PRESENCE OF PEOPLE UNDER 18 YEARS BY HOUSEHOLD TYPE	Households
+03	P20	31	HOUSEHOLDS BY AGE OF HOUSEHOLDER BY HOUSEHOLD TYPE (INCLUDING LIVING ALONE) BY PRESENCE OF OWN CHILDREN	Households
+03	P21	19	HOUSEHOLD TYPE BY AGE OF HOUSEHOLDER	Households
+03	P22	11	HOUSEHOLDS BY PRESENCE OF PEOPLE 60 YEARS AND OVER, HOUSEHOLD SIZE, AND HOUSEHOLD TYPE	Households
+03	P23	11	HOUSEHOLDS BY PRESENCE OF PEOPLE 65 YEARS AND OVER, HOUSEHOLD SIZE, AND HOUSEHOLD TYPE	Households
+03	P24	11	HOUSEHOLDS BY PRESENCE OF PEOPLE 75 YEARS AND OVER, HOUSEHOLD SIZE, AND HOUSEHOLD TYPE	Households
+03	P25	3	HOUSEHOLDS BY PRESENCE OF NONRELATIVES	Households
+03	P26	16	HOUSEHOLD TYPE BY HOUSEHOLD SIZE	Households
+03	P27	27	RELATIONSHIP BY HOUSEHOLD TYPE (INCLUDING LIVING ALONE)	Total population
+03	P28	17	RELATIONSHIP BY HOUSEHOLD TYPE FOR THE POPULATION UNDER 18 YEARS	Population under 18 years
+03	P29	46	RELATIONSHIP BY AGE FOR THE POPULATION UNDER 18 YEARS	Population under 18 years
+03	P30	22	RELATIONSHIP BY HOUSEHOLD TYPE (INCLUDING LIVING ALONE) FOR THE POPULATION 65 YEARS AND OVER	Population 65 years and over
+03	P31	1	FAMILIES	Families
+03	P32	1	POPULATION IN FAMILIES	Population in families
+03	P33	1	AVERAGE FAMILY SIZE	Families
+04	P34	20	FAMILY TYPE BY PRESENCE AND AGE OF OWN CHILDREN	Families
+04	P35	20	FAMILY TYPE BY PRESENCE AND AGE OF RELATED CHILDREN	Families
+04	P36	20	OWN CHILDREN UNDER 18 YEARS BY FAMILY TYPE AND AGE	Own children under 18 years
+04	P37	9	GROUP QUARTERS POPULATION BY GROUP QUARTERS TYPE	Population in group quarters
+04	P38	57	GROUP QUARTERS POPULATION BY SEX BY AGE BY GROUP QUARTERS TYPE	Population in group quarters
+04	P39	5	POPULATION SUBSTITUTED	Total population
+04	P40	3	IMPUTATION OF POPULATION ITEMS	Population not substituted
+04	P41	3	IMPUTATION OF RACE	Population not substituted
+04	P42	3	IMPUTATION OF HISPANIC OR LATINO	Population not substituted
+04	P43	3	IMPUTATION OF SEX	Population not substituted
+04	P44	3	IMPUTATION OF AGE	Population not substituted
+04	P45	3	IMPUTATION OF RELATIONSHIP	Population not substituted
+05	P12A	49	SEX BY AGE (WHITE ALONE)	People who are white alone
+05	P12B	49	SEX BY AGE (BLACK OR AFRICAN AMERICAN ALONE)	People who are Black or African American alone
+05	P12C	49	SEX BY AGE (AMERICAN INDIAN AND ALASKA NATIVE ALONE)	People who are American Indian and Alaska Native alone
+05	P12D	49	SEX BY AGE (ASIAN ALONE)	People who are Asian alone
+05	P12E	49	SEX BY AGE (NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER ALONE)	People who are Native Hawaiian and Other Pacific Islander alone
+06	P12F	49	SEX BY AGE (SOME OTHER RACE ALONE)	People who are Some other race alone
+06	P12G	49	SEX BY AGE (TWO OR MORE RACES)	People who are Two or more races
+06	P12H	49	SEX BY AGE (HISPANIC OR LATINO)	People who are Hispanic or Latino
+06	P12I	49	SEX BY AGE (WHITE ALONE, NOT HISPANIC OR LATINO)	People who are White alone, not Hispanic or Latino
+06	P13A	3	MEDIAN AGE BY SEX (WHITE ALONE)	People who are White alone
+06	P13B	3	MEDIAN AGE BY SEX (BLACK OR AFRICAN AMERICAN ALONE)	People who are Black or African American alone
+06	P13C	3	MEDIAN AGE BY SEX (AMERICAN INDIAN AND ALASKA NATIVE ALONE)	People who are American Indian and Alaska Native alone
+06	P13D	3	MEDIAN AGE BY SEX (ASIAN ALONE)	People who are Asian alone
+06	P13E	3	MEDIAN AGE BY SEX (NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER ALONE)	People who are Native Hawaiian and Other Pacific Islander alone
+06	P13F	3	MEDIAN AGE BY SEX (SOME OTHER RACE ALONE)	People who are Some other race alone
+06	P13G	3	MEDIAN AGE BY SEX (TWO OR MORE RACES)	People who are Two or more races
+06	P13H	3	MEDIAN AGE BY SEX (HISPANIC OR LATINO)	People who are Hispanic or Latino
+06	P13I	3	MEDIAN AGE BY SEX (WHITE ALONE, NOT HISPANIC OR LATINO)	People who are White alone, Not Hispanic or Latino
+06	P15A	1	HOUSEHOLDS (WHITE ALONE HOUSEHOLDER)	Households with a householder who is White alone
+06	P15B	1	HOUSEHOLDS (BLACK OR AFRICAN AMERICAN ALONE HOUSEHOLDER)	Households with a householder who is Black or African American alone
+06	P15C	1	HOUSEHOLDS (AMERICAN INDIAN AND ALASKA NATIVE ALONE HOUSEHOLDER)	Households with a householder who is American Indian and Alaska Native alone
+06	P15D	1	HOUSEHOLDS (ASIAN ALONE HOUSEHOLDER)	Households with a householder who is Asian alone
+06	P15E	1	HOUSEHOLDS (NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER ALONE HOUSEHOLDER)	Households with a householder who is Native Hawaiian and Other Pacific Islander alone
+06	P15F	1	HOUSEHOLDS (SOME OTHER RACE ALONE HOUSEHOLDER)	Households with a householder who is Some other race alone
+06	P15G	1	HOUSEHOLDS (TWO OR MORE RACES HOUSEHOLDER)	Households with a householder who is Two or more races
+06	P15H	1	HOUSEHOLDS (HISPANIC OR LATINO HOUSEHOLDER)	Households with a householder who is Hispanic or Latino
+06	P15I	1	HOUSEHOLDS (WHITE ALONE, NOT HISPANIC OR LATINO HOUSEHOLDER)	Households with a householder who is White alone, not Hispanic or Latino
+06	P16A	1	POPULATION IN HOUSEHOLDS (WHITE ALONE HOUSEHOLDER)	Population in households with a householder who is White alone
+06	P16B	1	POPULATION IN HOUSEHOLDS (BLACK OR AFRICAN AMERICAN ALONE HOUSEHOLDER)	Population in households with a householder who is Black or African American alone
+06	P16C	1	POPULATION IN HOUSEHOLDS (AMERICAN INDIAN AND ALASKA NATIVE ALONE HOUSEHOLDER)	Population in households with a householder who is American Indian and Alaska Native alone
+06	P16D	1	POPULATION IN HOUSEHOLDS (ASIAN ALONE HOUSEHOLDER)	Population in households with a householder who is Asian alone
+06	P16E	1	POPULATION IN HOUSEHOLDS (NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER ALONE HOUSEHOLDER)	Population in households with a householder who is Native Hawaiian and Other Pacific Islanderalone
+06	P16F	1	POPULATION IN HOUSEHOLDS (SOME OTHER RACE ALONE HOUSEHOLDER)	Population in households with a householder who is Some other race alone
+06	P16G	1	POPULATION IN HOUSEHOLDS (TWO OR MORE RACES HOUSEHOLDER)	Population in households with a householder who is Two or more races
+06	P16H	1	POPULATION IN HOUSEHOLDS (HISPANIC OR LATINO HOUSEHOLDER)	Population in households with a householder who is Hispanic or Latino
+06	P16I	1	POPULATION IN HOUSEHOLDS (WHITE ALONE, NOT HISPANIC OR LATINO HOUSEHOLDER)	Population in households with a householder who is White alone, not Hispanic or Latino
+07	P17A	1	AVERAGE HOUSEHOLD SIZE (WHITE ALONE HOUSEHOLDER)	Households with a householder who is White alone
+07	P17B	1	AVERAGE HOUSEHOLD SIZE (BLACK OR AFRICAN AMERICAN ALONE HOUSEHOLDER)	Households with a householder who is Black or African American alone
+07	P17C	1	AVERAGE HOUSEHOLD SIZE (AMERICAN INDIAN AND ALASKA NATIVE ALONE HOUSEHOLDER)	Households with a householder who is American Indian and Alaska Native alone
+07	P17D	1	AVERAGE HOUSEHOLD SIZE (ASIAN ALONE HOUSEHOLDER)	Households with a householder who is Asian alone
+07	P17E	1	AVERAGE HOUSEHOLD SIZE (NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER ALONE HOUSEHOLDER)	Households with a householder who is Native Hawaiian and Other Pacific Islander alone
+07	P17F	1	AVERAGE HOUSEHOLD SIZE (SOME OTHER RACE ALONE HOUSEHOLDER)	Households with a householder who is Some other race alone
+07	P17G	1	AVERAGE HOUSEHOLD SIZE (TWO OR MORE RACES HOUSEHOLDER)	Households with a householder who is Two or more races
+07	P17H	1	AVERAGE HOUSEHOLD SIZE (HISPANIC OR LATINO HOUSEHOLDER)	Households with a householder who is Hispanic or Latino
+07	P17I	1	AVERAGE HOUSEHOLD SIZE (WHITE ALONE, NOT HISPANIC OR LATINO HOUSEHOLDER)	Households with a householder who is White alone, not Hispanic or Latino
+07	P26A	16	HOUSEHOLD TYPE BY HOUSEHOLD SIZE (WHITE ALONE HOUSEHOLDER)	Households with a householder who is White alone
+07	P26B	16	HOUSEHOLD TYPE BY HOUSEHOLD SIZE (BLACK OR AFRICAN AMERICAN ALONE HOUSEHOLDER)	Households with a householder who is Black or African American alone
+07	P26C	16	HOUSEHOLD TYPE BY HOUSEHOLD SIZE (AMERICAN INDIAN AND ALASKA NATIVE ALONE HOUSEHOLDER)	Households with a householder who is American Indian and Alaska Native alone
+07	P26D	16	HOUSEHOLD TYPE BY HOUSEHOLD SIZE (ASIAN ALONE HOUSEHOLDER)	Households with a householder who is Asian alone
+07	P26E	16	HOUSEHOLD TYPE BY HOUSEHOLD SIZE (NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER ALONE HOUSEHOLDER)	Households with a householder who is Native Hawaiian and Other Pacific Islander alone
+07	P26F	16	HOUSEHOLD TYPE BY HOUSEHOLD SIZE (SOME OTHER RACE ALONE HOUSEHOLDER)	Households with a householder who is Some other race alone
+07	P26G	16	HOUSEHOLD TYPE BY HOUSEHOLD SIZE (TWO OR MORE RACES HOUSEHOLDER)	Households with a householder who is Two or more races
+07	P26H	16	HOUSEHOLD TYPE BY HOUSEHOLD SIZE (HISPANIC OR LATINO HOUSEHOLDER)	Households with a householder who is Hispanic or Latino
+07	P26I	16	HOUSEHOLD TYPE BY HOUSEHOLD SIZE (WHITE ALONE, NOT HISPANIC OR LATINO HOUSEHOLDER)	Households with a householder who is White Alone, not Hispanic or Latino
+07	P27A	27	RELATIONSHIP BY HOUSEHOLD TYPE (INCLUDING LIVING ALONE) (WHITE ALONE)	People who are White alone
+07	P27B	27	RELATIONSHIP BY HOUSEHOLD TYPE (INCLUDING LIVING ALONE) (BLACK OR AFRICAN AMERICAN ALONE)	People who are Black or African American alone
+07	P27C	27	RELATIONSHIP BY HOUSEHOLD TYPE (INCLUDING LIVING ALONE) (AMERICAN INDIAN AND ALASKA NATIVE ALONE)	People who are American Indian and Alaska Native alone
+08	P27D	27	RELATIONSHIP BY HOUSEHOLD TYPE (INCLUDING LIVING ALONE) (ASIAN ALONE)	People who are Asian alone
+08	P27E	27	RELATIONSHIP BY HOUSEHOLD TYPE (INCLUDING LIVING ALONE) (NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER ALONE)	People who are Native Hawaiian and Other Pacific Islander alone
+08	P27F	27	RELATIONSHIP BY HOUSEHOLD TYPE (INCLUDING LIVING ALONE) (SOME OTHER RACE ALONE)	People who are Some other race alone
+08	P27G	27	RELATIONSHIP BY HOUSEHOLD TYPE (INCLUDING LIVING ALONE) (TWO OR MORE RACES)	People who are Two or more races
+08	P28H	27	RELATIONSHIP BY HOUSEHOLD TYPE (INCLUDING LIVING ALONE) (HISPANIC OR LATINO)	People who are Hispanic or Latino
+08	P27I	27	RELATIONSHIP BY HOUSEHOLD TYPE (INCLUDING LIVING ALONE) (WHITE ALONE, NOT HISPANIC OR LATINO)	People who are White alone, not Hispanic or Latino
+08	P28A	17	RELATIONSHIP BY HOUSEHOLD TYPE FOR THE POPULATION UNDER 18 YEARS (WHITE ALONE)	White alone population under 18 years
+08	P28B	17	RELATIONSHIP BY HOUSEHOLD TYPE FOR THE POPULATION UNDER 18 YEARS (BLACK OR AFRICAN AMERICAN ALONE)	Black or African American alone population under 18 years
+08	P28C	17	RELATIONSHIP BY HOUSEHOLD TYPE FOR THE POPULATION UNDER 18 YEARS (AMERICAN INDIAN AND ALASKA NATIVE ALONE)	American Indian and Alaska Native alone population under 18 years
+08	P28D	17	RELATIONSHIP BY HOUSEHOLD TYPE FOR THE POPULATION UNDER 18 YEARS (ASIAN ALONE)	Asian alone population under 18 years
+08	P28E	17	RELATIONSHIP BY HOUSEHOLD TYPE FOR THE POPULATION UNDER 18 YEARS (NATIVE HAWAIIAN OTHER PACIFIC ISLANDER ALONE)	Native Hawaiian Other Pacific Islander alone population under 18 years
+09	P28F	17	RELATIONSHIP BY HOUSEHOLD TYPE FOR THE POPULATION UNDER 18 YEARS (SOME OTHER RACE ALONE)	Some other race alone population under 18 years
+09	P28G	17	RELATIONSHIP BY HOUSEHOLD TYPE FOR THE POPULATION UNDER 18 YEARS (TWO OR MORE RACES)	Two or more races population under 18 years
+09	P28H	17	RELATIONSHIP BY HOUSEHOLD TYPE FOR THE POPULATION UNDER 18 YEARS (HISPANIC OR LATINO)	Hispanic or Latino population under 18 years
+09	P28I	17	RELATIONSHIP BY HOUSEHOLD TYPE FOR THE POPULATION UNDER 18 YEARS (WHITE ALONE, NOT HISPANIC OR LATINO)	White alone, not Hispanic or Latino population under 18 years
+09	P30A	22	RELATIONSHIP BY HOUSEHOLD TYPE (INCLUDING LIVING ALONE) FOR THE POPULATION 65 YEARS AND OVER (WHITE ALONE)	White alone population 65 years and over
+09	P30B	22	RELATIONSHIP BY HOUSEHOLD TYPE (INCLUDING LIVING ALONE) FOR THE POPULATION 65 YEARS AND OVER (BLACK OR AFRICAN AMERICAN ALONE)	Black or African American alone population 65 years and over
+09	P30C	22	RELATIONSHIP BY HOUSEHOLD TYPE (INCLUDING LIVING ALONE) FOR THE POPULATION 65 YEARS AND OVER (AMERICAN INDIAN AND ALASKA NATIVE ALONE)	American Indian and Alaska Native alone population 65 years and over
+09	P30D	22	RELATIONSHIP BY HOUSEHOLD TYPE (INCLUDING LIVING ALONE) FOR THE POPULATION 65 YEARS AND OVER (ASIAN ALONE)	Asian alone population 65 years and over
+09	P30E	22	RELATIONSHIP BY HOUSEHOLD TYPE (INCLUDING LIVING ALONE) FOR THE POPULATION 65 YEARS AND OVER (NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER ALONE)	Native Hawaiian and Other Pacific Islander alone population 65 years and over
+09	P30F	22	RELATIONSHIP BY HOUSEHOLD TYPE (INCLUDING LIVING ALONE) FOR THE POPULATION 65 YEARS AND OVER (SOME OTHER RACE ALONE)	Some other race alone population 65 years and over
+09	P30G	22	RELATIONSHIP BY HOUSEHOLD TYPE (INCLUDING LIVING ALONE) FOR THE POPULATION 65 YEARS AND OVER (TWO OR MORE RACES)	Two or more races population 65 years and over
+09	P30H	22	RELATIONSHIP BY HOUSEHOLD TYPE (INCLUDING LIVING ALONE) FOR THE POPULATION 65 YEARS AND OVER (HISPANIC OR LATINO)	Hispanic or Latino population 65 years and over
+10	P30I	22	RELATIONSHIP BY HOUSEHOLD TYPE (INCLUDING LIVING ALONE) FOR THE POPULATION 65 YEARS AND OVER (WHITE ALONE, NOT HISPANIC OR LATINO)	White alone, not Hispanic or Latino population 65 years and over
+10	P31A	1	FAMILIES (WHITE ALONE HOUSEHOLDER)	Families with a householder who is White alone
+10	P31B	1	FAMILIES (BLACK OR AFRICAN AMERICAN ALONE HOUSEHOLDER)	Families with a householder who is Black or African American alone
+10	P31C	1	FAMILIES (AMERICAN INDIAN AND ALASKA NATIVE ALONE HOUSEHOLDER)	Families with a householder who is American Indian and Alaska Native alone
+10	P31D	1	FAMILIES (ASIAN ALONE HOUSEHOLDER)	Families with a householder who is Asian alone
+10	P31E	1	FAMILIES ( NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER ALONE HOUSEHOLDER)	Families with a householder who is Native Hawaiian and Other Pacific Islander alone
+10	P31F	1	FAMILIES (SOME OTHER RACE ALONE HOUSEHOLDER)	Families with a householder who is Some other race alone
+10	P31G	1	FAMILIES (TWO OR MORE RACES HOUSEHOLDER)	Families with a householder who is Two or more races
+10	P31H	1	FAMILIES (HISPANIC OR LATINO HOUSEHOLDER)	Families with a householder who is Hispanic or Latino
+10	P31I	1	FAMILIES (WHITE ALONE, NOT HISPANIC OR LATINO HOUSEHOLDER)	Families with a householder who is White alone, not Hispanic or Latino
+10	P32A	1	POPULATION IN FAMILIES (WHITE ALONE HOUSEHOLDER)	Population in families with a householder who is white alone
+10	P32B	1	POPULATION IN FAMILIES (BLACK OR AFRICAN AMERICAN ALONE HOUSEHOLDER)	Population in families with a householder who is Black or African American alone
+10	P32C	1	POPULATION IN FAMILIES (AMERICAN INDIAN AND ALASKA NATIVE ALONE HOUSEHOLD)	Population in families with a householder who is American Indian and Alaska Native alone
+10	P32D	1	POPULATION IN FAMILIES (ASIAN ALONE HOUSEHOLDER)	Population in families with a householder who is Asian alone
+10	P32E	1	POPULATION IN FAMILIES (NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER ALONE HOUSEHOLDER)	Population in families with a householder who is Native Hawaiian and Other Pacific Islanderalone
+10	P32F	1	POPULATION IN FAMILIES (SOME OTHER RACE ALONE HOUSEHOLDER)	Population in families with a householder who is Some other race alone
+10	P32G	1	POPULATION IN FAMILIES (TWO OR MORE RACES HOUSEHOLDER)	Population in families with a householder who is Two or more races
+10	P32H	1	POPULATION IN FAMILIES (HISPANIC OR LATINO HOUSEHOLDER)	Population in families with a householder who is Hispanic or Latino
+10	P32I	1	POPULATION IN FAMILIES (WHITE ALONE, NOT HISPANIC OR LATINO HOUSEHOLDER)	Population in families with a householder who is White alone, not Hispanic or Latino
+10	P33A	1	AVERAGE FAMILY SIZE (WHITE ALONE HOUSEHOLDER)	Families with a householder who is White alone
+10	P33B	1	AVERAGE FAMILY SIZE (BLACK OR AFRICAN AMERICAN ALONE HOUSEHOLDER)	Families with a householder who is Black or African American alone
+10	P33C	1	AVERAGE FAMILY SIZE (AMERICAN INDIAN AND ALASKA NATIVE ALONE HOUSEHOLDER)	Families with a householder who is American Indian and Alaska Native alone
+10	P33D	1	AVERAGE FAMILY SIZE (ASIAN ALONE HOUSEHOLDER)	Families with a householder who is Asian alone
+10	P33E	1	AVERAGE FAMILY SIZE (NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER ALONE HOUSEHOLDER)	Families with a householder who is Native Hawaiian and Other Pacific Islander alone
+10	P33F	1	AVERAGE FAMILY SIZE (SOME OTHER RACE ALONE HOUSEHOLDER)	Families with a householder who is Some other race alone
+10	P33G	1	AVERAGE FAMILY SIZE (TWO OR MORE RACES HOUSEHOLDER)	Families with a householder who is Two or more races
+10	P33H	1	AVERAGE FAMILY SIZE (HISPANIC OR LATINO HOUSEHOLDER)	Families with a householder who is Hispanic or Latino
+10	P33I	1	AVERAGE FAMILY SIZE (WHITE ALONE, NOT HISPANIC OR LATINO HOUSEHOLDER)	Families with a householder who is White alone, not Hispanic or Latino
+10	P34A	20	FAMILY TYPE BY PRESENCE AND AGE OF OWN CHILDREN (WHITE ALONE HOUSEHOLDER)	Families with a householder who is White alone
+10	P34B	20	FAMILY TYPE BY PRESENCE AND AGE OF OWN CHILDREN (BLACK OR AFRICAN AMERICAN ALONE HOUSEHOLDER)	Families with a householder who is Black or African American alone
+10	P34C	20	FAMILY TYPE BY PRESENCE AND AGE OF OWN CHILDREN (AMERICAN INDIAN AND ALASKA NATIVE ALONE HOUSEHOLDER)	Families with a householder who is American Indian and Alaska Native alone
+10	P34D	20	FAMILY TYPE BY PRESENCE AND AGE OF OWN CHILDREN (ASIAN ALONE HOUSEHOLDER)	Families with a householder who is Asian alone
+10	P34E	20	FAMILY TYPE BY PRESENCE AND AGE OF OWN CHILDREN (NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER ALONE HOUSEHOLDER)	Families with a householder who is Native Hawaiian and Other Pacific Islander alone
+10	P34F	20	FAMILY TYPE BY PRESENCE AND AGE OF OWN CHILDREN (SOME OTHER RACE ALONE HOUSEHOLDER)	Families with a householder who is Some other race alone
+10	P34G	20	FAMILY TYPE BY PRESENCE AND AGE OF OWN CHILDREN (TWO OR MORE RACES HOUSEHOLDER)	Families with a householder who is Two or more races
+10	P34H	20	FAMILY TYPE BY PRESENCE AND AGE OF OWN CHILDREN (HISPANIC OR LATINO HOUSEHOLDER)	Families with a householder who is Hispanic or Latino
+10	P34I	20	FAMILY TYPE BY PRESENCE AND AGE OF OWN CHILDREN (WHITE ALONE, NOT HISPANIC OR LATINO HOUSEHOLDER)	Families with a householder who is White alone, not Hispanic or Latino
+11	P35A	20	FAMILY TYPE BY PRESENCE AND AGE OF RELATED CHILDREN (WHITE ALONE HOUSEHOLDER)	Families with a householder who is White alone
+11	P35B	20	FAMILY TYPE BY PRESENCE AND AGE OF RELATED CHILDREN (BLACK OR AFRICAN AMERICAN ALONE HOUSEHOLDER)	Families with a householder who is Black or African American alone
+11	P35C	20	FAMILY TYPE BY PRESENCE AND AGE OF RELATED CHILDREN (AMERICAN INDIAN AND ALASKA NATIVE ALONE HOUSEHOLDER)	Families with a householder who is American Indian and Alaska Native alone
+11	P35D	20	FAMILY TYPE BY PRESENCE AND AGE OF RELATED CHILDREN (ASIAN ALONE HOUSEHOLDER) [20]	Families with a householder who is Asian alone
+11	P35E	20	FAMILY TYPE BY PRESENCE AND AGE OF RELATED CHILDREN (NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER ALONE HOUSEHOLDER)	Families with a householder who is Native Hawaiian and Other Pacific Islander alone
+11	P35F	20	FAMILY TYPE BY PRESENCE AND AGE OF RELATED CHILDREN (SOME OTHER RACE ALONE HOUSEHOLDER)	Families with a householder who is Some other race alone
+11	P35G	20	FAMILY TYPE BY PRESENCE AND AGE OF RELATED CHILDREN (TWO OR MORE RACES HOUSEHOLDER)	Families with a householder who is Two or more races
+11	P35H	20	FAMILY TYPE BY PRESENCE AND AGE OF RELATED CHILDREN (HISPANIC OR LATINO HOUSEHOLDER)	Families with a householder who is Hispanic or Latino
+11	P35I	20	FAMILY TYPE BY PRESENCE AND AGE OF RELATED CHILDREN (WHITE ALONE, NOT HISPANIC OR LATINO HOUSEHOLDER)	Families with a householder who is White alone, not Hispanic or Latino
+12	PCT1	47	AMERICAN INDIAN AND ALASKA NATIVE ALONE WITH ONE TRIBE REPORTED FOR SELECTED TRIBES	People who are American Indian and Alaska Native alone - total tribes tallied for people with one tribe only, and people with no tribe reported
+12	PCT2	47	AMERICAN INDIAN AND ALASKA NATIVE ALONE WITH ONE OR MORE TRIBES REPORTED FOR SELECTED TRIBES	People who are American Indian and Alaska Native alone - total tribes tallied for people with one or more tribes, and people with no tribe reported
+12	PCT3	47	AMERICAN INDIAN AND ALASKA NATIVE ALONE OR IN COMBINATION WITH ONE OR MORE OTHER RACES AND WITH ONE OR MORE TRIBES REPORTED FOR SELECTED TRIBES	People who are American Indian and Alaska Native alone or in combination with one or more other races - total tribes tallied for people with one or more tribes, and people with no tribe reported
+12	PCT4	9	AMERICAN INDIAN AND ALASKA NATIVE ALONE OR IN COMBINATION WITH ONE OR MORE OTHER RACES	People who are American Indian or Alaska Native alone or in combination with one or more otherraces
+12	PCT5	19	ASIAN ALONE WITH ONE ASIAN CATEGORY FOR SELECTED GROUPS	Total Asian categories tallied for people with one Asian category only and people with no specific Asian category reported
+12	PCT6	19	ASIAN ALONE WITH ONE OR MORE ASIAN CATEGORIES FOR SELECTED GROUPS	Total Asian categories tallied for people with one or more Asian categories only and people with no specific Asian category reported
+12	PCT7	19	ASIAN ALONE OR IN COMBINATION WITH ONE OR MORE OTHER RACES, AND WITH ONE OR MORE ASIAN CATEGORIES FOR SELECTED GROUPS	Total Asian categories tallied and people with no specific Asian category reported
+12	PCT8	14	NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER ALONE WITH ONE NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER CATEGORY FOR SELECTED GROUPS	Total Native Hawaiian and Other Pacific Islander categories tallied for people with one Native Hawaiian and Other Pacific Islander category only and people with no specific Native Hawaiian and Other Pacific Islander category reported
+12	PCT9	14	NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER ALONE WITH ONE OR MORE NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER CATEGORIES FOR SELECTED GROUPS	Total Native Hawaiian and Other Pacific Islander categories tallied for people with one or more Native Hawaiian or Other Pacific Islander categories only and people with no specific Native Hawaiian and Other Pacific Islander category reported
+13	PCT10	14	NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER ALONE OR IN COMBINATION WITH ONE OR MORE OTHER RACES, AND WITH ONE OR MORE NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER CATEGORIES FOR SELECTED GROUPS	Total Native Hawaiian and Other Pacific Islander categories tallied and people with no specific Native Hawaiian and Other Pacific Islander category reported
+13	PCT11	31	HISPANIC OR LATINO BY SPECIFIC ORIGIN	Total population
+14	PCT12	209	SEX BY AGE	Total population
+15	PCT13	49	SEX BY AGE	Population in households
+15	PCT14	7	UNMARRIED-PARTNER HOUSEHOLDS BY SEX OF PARTNERS	Households
+15	PCT15	13	NONRELATIVES BY HOUSEHOLD TYPE	Nonrelatives
+15	PCT16	52	GROUP QUARTERS POPULATION BY GROUP QUARTERS TYPE	Population in group quarters
+15	PCT17	75	GROUP QUARTERS POPULATION BY SEX BY AGE BY GROUP QUARTERS TYPE	Population in group quarters
+16	PCT12A	209	SEX BY AGE (WHITE ALONE)	People who are White alone
+17	PCT12B	209	SEX BY AGE (BLACK OR AFRICAN AMERICAN ALONE)	People who are Black or African American alone
+18	PCT12C	209	SEX BY AGE (AMERICAN INDIAN AND ALASKA NATIVE ALONE)	People who are American Indian and Alaska Native alone
+19	PCT12D	209	SEX BY AGE (ASIAN ALONE)	People who are Asian alone
+20	PCT12E	209	SEX BY AGE (NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER ALONE)	People who are Native Hawaiian and Other Pacific Islander alone
+21	PCT12F	209	SEX BY AGE (SOME OTHER RACE ALONE)	People who are Some other race alone
+22	PCT12G	209	SEX BY AGE (TWO OR MORE RACES)	People who are Two or more races
+23	PCT12H	209	SEX BY AGE (HISPANIC OR LATINO)	People who are Hispanic or Latino
+24	PCT12I	209	SEX BY AGE (WHITE ALONE, NOT HISPANIC OR LATINO)	People who are White alone, not Hispanic or Latino
+25	PCT12J	209	SEX BY AGE (BLACK OR AFRICAN AMERICAN ALONE, NOT HISPANIC OR LATINO)	People who are Black or African American alone, not Hispanic or Latino
+26	PCT12K	209	SEX BY AGE (AMERICAN INDIAN AND ALASKA NATIVE ALONE, NOT HISPANIC OR LATINO)	People who are American Indian and Alaska Native alone, not Hispanic or Latino
+27	PCT12L	209	SEX BY AGE (ASIAN ALONE, NOT HISPANIC OR LATINO)	People who are Asian alone, not Hispanic or Latino
+28	PCT12M	209	SEX BY AGE (NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER ALONE, NOT HISPANIC OR LATINO)	People who are Native Hawaiian and Other Pacific Islander alone, not Hispanic or Latino
+29	PCT12N	209	SEX BY AGE (SOME OTHER RACE ALONE, NOT HISPANIC OR LATINO)	People who are Some other race alone, not Hispanic or Latino
+30	PCT12O	209	SEX BY AGE (TWO OR MORE RACES, NOT HISPANIC OR LATINO)	People who are Two or more races, not Hispanic or Latino
+31	PCT13A	49	SEX BY AGE (WHITE ALONE)	People in households who are White alone
+31	PCT13B	49	SEX BY AGE (BLACK OR AFRICAN AMERICAN ALONE)	People in households who are Black or African American alone
+31	PCT13C	49	SEX BY AGE (AMERICAN INDIAN AND ALASKA NATIVE ALONE)	People in households who are American Indian and Alaska Native alone
+31	PCT13D	49	SEX BY AGE (ASIAN ALONE)	People in households who are Asian alone
+31	PCT13E	49	SEX BY AGE (NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER ALONE)	People in households who are Native Hawaiian and Other Pacific Islander alone
+32	PCT13F	49	SEX BY AGE (SOME OTHER RACE ALONE)	People in households who are Some other race alone
+32	PCT13G	49	SEX BY AGE (TWO OR MORE RACES)	People in households who are Two or more races
+32	PCT13H	49	SEX BY AGE (HISPANIC OR LATINO)	People in households who are Hispanic or Latino
+32	PCT13I	49	SEX BY AGE (WHITE ALONE, NOT HISPANIC OR LATINO)	People in households who are White alone, not Hispanic or Latino
+32	PCT15A	13	NONRELATIVES BY HOUSEHOLD TYPE (WHITE ALONE)	Nonrelatives who are White alone
+32	PCT15B	13	NONRELATIVES BY HOUSEHOLD TYPE (BLACK OR AFRICAN AMERICAN ALONE)	Nonrelatives who are Black or African American alone
+32	PCT15C	13	NONRELATIVES BY HOUSEHOLD TYPE (AMERICAN INDIAN AND ALASKA NATIVE ALONE)	Nonrelatives who are American Indian and Alaska Native alone
+33	PCT15D	13	NONRELATIVES BY HOUSEHOLD TYPE (ASIAN ALONE)	Nonrelatives who are Asian alone
+33	PCT15E	13	NONRELATIVES BY HOUSEHOLD TYPE (NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER ALONE)	Nonrelatives who are Native Hawaiian and Other Pacific Islander alone
+33	PCT15F	13	NONRELATIVES BY HOUSEHOLD TYPE (SOME OTHER RACE ALONE)	Nonrelatives who are Some other race alone
+33	PCT15G	13	NONRELATIVES BY HOUSEHOLD TYPE (TWO OR MORE RACES)	Nonrelatives who are Two or more races
+33	PCT15H	13	NONRELATIVES BY HOUSEHOLD TYPE (HISPANIC OR LATINO)	Nonrelatives who are Hispanic or Latino
+33	PCT15I	13	NONRELATIVES BY HOUSEHOLD TYPE (WHITE ALONE, NOT HISPANIC OR LATINO)	Nonrelatives who are White alone, not Hispanic or Latino
+33	PCT17A	75	GROUP QUARTERS POPULATION BY SEX BY AGE BY GROUP QUARTERS TYPE (WHITE ALONE)	Population in group quarters who are White alone
+33	PCT17B	75	GROUP QUARTERS POPULATION BY SEX BY AGE BY GROUP QUARTERS TYPE (BLACK OR AFRICAN AMERICAN ALONE)	Population in group quarters who are Black or African American alone
+34	PCT17C	75	GROUP QUARTERS POPULATION BY SEX BY AGE BY GROUP QUARTERS TYPE (AMERICAN INDIAN AND ALASKA NATIVE ALONE)	Population in group quarters who are American Indian and Alaska Native alone
+34	PCT17D	75	GROUP QUARTERS POPULATION BY SEX BY AGE BY GROUP QUARTERS TYPE (ASIAN ALONE)	Population in group quarters who are Asian alone
+34	PCT17E	75	GROUP QUARTERS POPULATION BY SEX BY AGE BY GROUP QUARTERS TYPE (NATIVE HAWAIIAN ANDOTHER PACIFIC ISLANDER ALONE)	Population in group quarters who are Native Hawaiian and Other Pacific Islander alone
+35	PCT17F	75	GROUP QUARTERS POPULATION BY SEX BY AGE BY GROUP QUARTERS TYPE (SOME OTHER RACE ALONE)	Population in group quarters who are Some other race alone
+35	PCT17G	75	GROUP QUARTERS POPULATION BY SEX BY AGE BY GROUP QUARTERS TYPE (TWO OR MORE RACES)	Population in group quarters who are Two or more races
+35	PCT17H	75	GROUP QUARTERS POPULATION BY SEX BY AGE BY GROUP QUARTERS TYPE (HISPANIC OR LATINO)	Population in group quarters who are Hispanic or Latino
+36	PCT17I	75	GROUP QUARTERS POPULATION BY SEX BY AGE BY GROUP QUARTERS TYPE (WHITE ALONE, NOT HISPANIC OR LATINO)	Population in group quarters who are White alone, not Hispanic or Latino
+37	H1	1	HOUSING UNITS	Housingunits
+37	H2	6	URBAN AND RURAL (FINAL NATIONAL FILE ONLY)	Housingunits
+37	H3	3	OCCUPANCY STATUS	Housingunits
+37	H4	3	TENURE	Occupied housing units
+37	H5	7	VACANCY STATUS	Vacant housing units
+37	H6	8	RACE OF HOUSEHOLDER	Occupied housing units
+37	H7	17	HISPANIC OR LATINO HOUSEHOLDER BY RACE OF HOUSEHOLDER	Occupied housing units
+37	H8	7	TOTAL RACES TALLIED FOR HOUSEHOLDERS	Total races tallied for householders in occupied housing units
+37	H9	15	HISPANIC OR LATINO BY TOTAL RACES TALLIED FOR HOUSEHOLDERS	Total races tallied for householders in occupied housing units
+37	H10	1	TOTAL POPULATION IN OCCUPIED HOUSING UNITS	Population in occupied housing units
+37	H11	3	TOTAL POPULATION IN OCCUPIED HOUSING UNITS BY TENURE	Population in occupied housing units
+37	H12	3	AVERAGE HOUSEHOLD SIZE OF OCCUPIED HOUSING UNITS BY TENURE	Occupied housing units
+37	H13	8	HOUSEHOLD SIZE	Occupied housing units
+37	H14	17	TENURE BY RACE OF HOUSEHOLDER	Occupied housing units
+37	H15	17	TENURE BY HOUSEHOLD SIZE	Occupied housing units
+37	H16	19	TENURE BY AGE OF HOUSEHOLDER	Occupied housing units
+37	H17	69	TENURE BY HOUSEHOLD TYPE (INCLUDING LIVING ALONE) BY AGE OF HOUSEHOLDER	Occupied housing units
+37	H18	3	OCCUPIED HOUSING UNITS SUBSTITUTED	Occupied housing units
+37	H19	5	IMPUTATION OF VACANCY STATUS	Vacant housing units
+37	H20	5	IMPUTATION OF TENURE	Occupied housing units
+38	H11A	3	TOTAL POPULATION IN OCCUPIED HOUSING UNITS BY TENURE (WHITE ALONE HOUSEHOLDER)	Population in occupied housing units with a householder who is White alone
+38	H11B	3	TOTAL POPULATION IN OCCUPIED HOUSING UNITS BY TENURE (BLACK OR AFRICAN AMERICAN ALONE HOUSEHOLDER)	Population in occupied housing units with a householder who is Black or African American alone
+38	H11C	3	TOTAL POPULATION IN OCCUPIED HOUSING UNITS BY TENURE (AMERICAN INDIAN AND ALASKA NATIVE ALONE HOUSEHOLDER)	Population in occupied housing units with a householder who is American Indian and Alaska Native alone
+38	H11D	3	TOTAL POPULATION IN OCCUPIED HOUSING UNITS BY TENURE (ASIAN ALONE HOUSEHOLDER)	Population in occupied housing units with a householder who is Asian alone
+38	H11E	3	TOTAL POPULATION IN OCCUPIED HOUSING UNITS BY TENURE (NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER ALONE HOUSEHOLDER)	Population in occupied housing units with a householder who is Native Hawaiian and Other PacificIslanderalone
+38	H11F	3	TOTAL POPULATION IN OCCUPIED HOUSING UNITS BY TENURE (SOME OTHER RACE ALONE HOUSEHOLDER)	Population in occupied housing units with a householder who is Some other race alone
+38	H11G	3	TOTAL POPULATION IN OCCUPIED HOUSING UNITS BY TENURE (TWO OR MORE RACES HOUSEHOLDER)	Population in occupied housing units with a householder who is Two or more races
+38	H11H	3	TOTAL POPULATION IN OCCUPIED HOUSING UNITS BY TENURE (HISPANIC OR LATINO HOUSEHOLDER)	Population in occupied housing units with a householder who is Hispanic or Latino
+38	H11I	3	TOTAL POPULATION IN OCCUPIED HOUSING UNITS BY TENURE (WHITE ALONE, NOT HISPANIC OR LATINO HOUSEHOLDER)	Population in occupied housing units with a householder who is White alone, not Hispanic orLatino
+38	H12A	3	AVERAGE HOUSEHOLD SIZE OF OCCUPIED HOUSING UNITS BY TENURE (WHITE ALONE HOUSEHOLDER)	Occupied housing units with a householder who is White alone
+38	H12B	3	AVERAGE HOUSEHOLD SIZE OF OCCUPIED HOUSING UNITS BY TENURE (BLACK OR AFRICAN AMERICAN ALONE HOUSEHOLDER) [3]	Occupied housing units with a householder who is Black or African American alone
+38	H12C	3	AVERAGE HOUSEHOLD SIZE OF OCCUPIED HOUSING UNITS BY TENURE (AMERICAN INDIAN AND ALASKA NATIVE ALONE HOUSEHOLDER)	Occupied housing units with a householder who is American Indian and Alaska Native alone
+38	H12D	3	AVERAGE HOUSEHOLD SIZE OF OCCUPIED HOUSING UNITS BY TENURE (ASIAN ALONE HOUSEHOLDER)	Occupied housing units with a householder who is Asian alone
+38	H12E	3	AVERAGE HOUSEHOLD SIZE OF OCCUPIED HOUSING UNITS BY TENURE (NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER ALONE HOUSEHOLDER)	Occupied housing units with a householder who is Native Hawaiian and Other Pacific Islanderalone
+38	H12F	3	AVERAGE HOUSEHOLD SIZE OF OCCUPIED HOUSING UNITS BY TENURE (SOME OTHER RACE ALONE HOUSEHOLDER)	Occupied housing units with a householder who is Some other race alone
+38	H12G	3	AVERAGE HOUSEHOLD SIZE OF OCCUPIED HOUSING UNITS BY TENURE (TWO OR MORE RACES HOUSEHOLDER)	Occupied housing units with a householder who is Two or more races
+38	H12H	3	AVERAGE HOUSEHOLD SIZE OF OCCUPIED HOUSING UNITS BY TENURE (HISPANIC OR LATINO HOUSEHOLDER)	Occupied housing units with a householder who is Hispanic or Latino
+38	H12I	3	AVERAGE HOUSEHOLD SIZE OF OCCUPIED HOUSING UNITS BY TENURE (WHITE ALONE, NOT HISPANIC OR LATINO HOUSEHOLDER)	Occupied housing units with a householder who is White alone, not Hispanic or Latino
+38	H15A	17	TENURE BY HOUSEHOLD SIZE (WHITE ALONE HOUSEHOLDER)	Occupied housing units with a householder who is White alone
+38	H15B	17	TENURE BY HOUSEHOLD SIZE (BLACK OR AFRICAN AMERICAN ALONE HOUSEHOLDER)	Occupied housing units with a householder who is Black or African American alone
+38	H15C	17	TENURE BY HOUSEHOLD SIZE (AMERICAN INDIAN AND ALASKA NATIVE ALONE HOUSEHOLDER)	Occupied housing units with a householder who is American Indian and Alaska Native alone
+38	H15D	17	TENURE BY HOUSEHOLD SIZE (ASIAN ALONE HOUSEHOLDER)	Occupied housing units with a householder who is Asian alone
+38	H15E	17	TENURE BY HOUSEHOLD SIZE (NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER ALONE HOUSEHOLDER)	Occupied housing units with a householder who is Native Hawaiian and Other Pacific Islanderalone
+38	H15F	17	TENURE BY HOUSEHOLD SIZE (SOME OTHER RACE ALONE HOUSEHOLDER)	Occupied housing units with a householder who is Some other race alone
+38	H15G	17	TENURE BY HOUSEHOLD SIZE (TWO OR MORE RACES HOUSEHOLDER)	Occupied housing units with a householder who is Two or more races
+38	H15H	17	TENURE BY HOUSEHOLD SIZE (HISPANIC OR LATINO HOUSEHOLDER)	Occupied housing units with a householder who is Hispanic or Latino
+38	H15I	17	TENURE BY HOUSEHOLD SIZE (WHITE ALONE, NOT HISPANIC OR LATINO HOUSEHOLDER)	Occupied housing units with a householder who is White alone, not Hispanic and Latino
+39	H16A	19	TENURE BY AGE OF HOUSEHOLDER (WHITE ALONE HOUSEHOLDER)	Occupied housing units with a householder who is White alone
+39	H16B	19	TENURE BY AGE OF HOUSEHOLDER (BLACK OR AFRICAN AMERICAN ALONE HOUSEHOLDER)	Occupied housing units with a householder who is Black or African American alone
+39	H16C	19	TENURE BY AGE OF HOUSEHOLDER (AMERICAN INDIAN AND ALASKA NATIVE ALONE HOUSEHOLDER)	Occupied housing units with a householder who is American Indian and Alaska Native alone
+39	H16D	19	TENURE BY AGE OF HOUSEHOLDER (ASIAN ALONE HOUSEHOLDER)	Occupied housing units with a householder who is Asian alone
+39	H16E	19	TENURE BY AGE OF HOUSEHOLDER (NATIVE HAWAIIAN AND OTHER PACIFIC ISLANDER ALONE HOUSEHOLDER)	Occupied housing units with a householder who is Native Hawaiian and Other Pacific Islanderalone
+39	H16F	19	TENURE BY AGE OF HOUSEHOLDER (SOME OTHER RACE ALONE HOUSEHOLDER)	Occupied housing units with a householder who is Some other race alone
+39	H16G	19	TENURE BY AGE OF HOUSEHOLDER (TWO OR MORE RACES HOUSEHOLDER)	Occupied housing units with a householder who is Two or more races
+39	H16H	19	TENURE BY AGE OF HOUSEHOLDER (HISPANIC OR LATINO HOUSEHOLDER)	Occupied housing units with a householder who is Hispanic or Latino
+39	H16I	19	TENURE BY AGE OF HOUSEHOLDER (WHITE ALONE, NOT HISPANIC OR LATINO HOUSEHOLDER)	Occupied housing units with a householder who is White alone, not Hispanic or Latino
