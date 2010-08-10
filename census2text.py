@@ -121,13 +121,13 @@ def geo_lines(path):
     
     assert len(n) == 1, 'Expected one file, not %d: %s' % (len(n), repr(n))
     
-    for line in z.open(n[0]):
-        data = [('LOGRECNO', 18, 25), ('SUMLEV', 8, 11), ('GEOCOMP', 11, 13),
-                ('LATITUDE', 310, 319), ('LONGITUDE', 319, 329),
-                ('STATE', 29, 31), ('COUNTY', 31, 34), ('TRACT', 55, 61),
-                ('BLOCK', 62, 66), ('NAME', 200, 290)]
+    cols = [('LATITUDE', 310, 319), ('LONGITUDE', 319, 329),
+            ('LOGRECNO', 18, 25), ('SUMLEV', 8, 11), ('GEOCOMP', 11, 13),
+            ('STATE', 29, 31), ('COUNTY', 31, 34), ('TRACT', 55, 61),
+            ('BLOCK', 62, 66), ('NAME', 200, 290)]
 
-        data = dict( [(key, line[s:e].strip()) for (key, s, e) in data] )
+    for line in z.open(n[0]):
+        data = dict( [(key, line[s:e].strip()) for (key, s, e) in cols] )
         
         lat, lon = data['LATITUDE'], data['LONGITUDE']
         data['LATITUDE'] = (lat[0] + lat[1:-6].lstrip('0') + '.' + lat[-6:]).lstrip('+')
