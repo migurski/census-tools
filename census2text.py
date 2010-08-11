@@ -130,6 +130,41 @@ def file_choice(table, verbose):
         
         column_offset += cell_count
 
+def file_paths(state, file_name):
+    """
+    """
+    if state:
+        dir_name = state.replace(' ', '_')
+        state_prefix = states.get(state).lower()
+        geo_path = 'Summary_File_1/%s/%sgeo_uf1.zip' % (dir_name, state_prefix)
+        data_path = 'Summary_File_1/%s/%s000%s_uf1.zip' % (dir_name, state_prefix, file_name)
+    
+    else:
+        geo_path = 'Summary_File_1/0Final_National/usgeo_uf1.zip'
+        data_path = 'Summary_File_1/0Final_National/us000%s_uf1.zip' % file_name
+
+    return geo_path, data_path
+
+def column_names(wide):
+    """
+    """
+    if wide is True:
+        return ['Summary Level', 'Geographic Component', 'State FIPS', 'County FIPS', 'Tract', 'Block', 'Name', 'Latitude', 'Longitude']
+    elif wide is False:
+        return ['State FIPS', 'County FIPS', 'Tract', 'Block']
+    else:
+        return ['Summary Level', 'Geographic Component', 'State FIPS', 'County FIPS', 'Tract', 'Block', 'Name']
+
+def key_names(wide):
+    """
+    """
+    if wide is True:
+        return ('SUMLEV', 'GEOCOMP', 'STATE', 'COUNTY', 'TRACT', 'BLOCK', 'NAME', 'LATITUDE', 'LONGITUDE')
+    elif wide is False:
+        return ('STATE', 'COUNTY', 'TRACT', 'BLOCK')
+    else:
+        return ('SUMLEV', 'GEOCOMP', 'STATE', 'COUNTY', 'TRACT', 'BLOCK', 'NAME')
+
 def geo_lines(path, verbose):
     """
     """
@@ -233,59 +268,43 @@ parser.add_option('-v', '--verbose', dest='verbose',
                   help='Be louder than normal',
                   action='store_true')
 
-options, args = parser.parse_args()
+if __name__ == '__main__':
 
-if options.summary_level in summary_levels:
-    options.summary_level = summary_levels[options.summary_level]
-
-file_name, column_offset, cell_count = file_choice(options.table, options.verbose is not False)
-
-if options.verbose is not False:
-    print >> stderr, options.summary_level, options.state, options.table, file_name, column_offset, cell_count
-    print >> stderr, '-' * 32
-
-if options.state:
-    dir_name = options.state.replace(' ', '_')
-    state_prefix = states.get(options.state).lower()
-    geo_path = 'Summary_File_1/%s/%sgeo_uf1.zip' % (dir_name, state_prefix)
-    data_path = 'Summary_File_1/%s/%s000%s_uf1.zip' % (dir_name, state_prefix, file_name)
-
-else:
-    geo_path = 'Summary_File_1/0Final_National/usgeo_uf1.zip'
-    data_path = 'Summary_File_1/0Final_National/us000%s_uf1.zip' % file_name
-
-out = options.output and open(options.output, 'w') or stdout
-out = writer(out, dialect='excel-tab')
-
-if options.wide is True:
-    row = ['Summary Level', 'Geographic Component', 'State FIPS', 'County FIPS', 'Tract', 'Block', 'Name', 'Latitude', 'Longitude']
-elif options.wide is False:
-    row = ['State FIPS', 'County FIPS', 'Tract', 'Block']
-else:
-    row = ['Summary Level', 'Geographic Component', 'State FIPS', 'County FIPS', 'Tract', 'Block', 'Name']
-
-tab, pat = options.table, compile(r'^([A-Z]+)(\d+)([A-Z]*)$')
-row += ['%s%03d%s%03d' % (pat.sub(r'\1', tab), int(pat.sub(r'\2', tab)), pat.sub(r'\3', tab), cell) for cell in range(1, cell_count + 1)]
-
-out.writerow(row)
-
-for (geo, data) in izip(geo_lines(geo_path, options.verbose), data_lines(data_path, options.verbose)):
-
-    if geo['GEOCOMP'] == '00':
-        # Geographic Component "00" means the whole thing,
-        # not e.g. "01" for urban or "43" for rural parts.
-
-        if geo['SUMLEV'] == options.summary_level:
-            assert geo['LOGRECNO'] == data[4], 'Wah'
-            
-            if options.wide is True:
-                row = [geo[key] for key in ('SUMLEV', 'GEOCOMP', 'STATE', 'COUNTY', 'TRACT', 'BLOCK', 'NAME', 'LATITUDE', 'LONGITUDE')]
-            elif options.wide is False:
-                row = [geo[key] for key in ('STATE', 'COUNTY', 'TRACT', 'BLOCK')]
-            else:
-                row = [geo[key] for key in ('SUMLEV', 'GEOCOMP', 'STATE', 'COUNTY', 'TRACT', 'BLOCK', 'NAME')]
-            
-            row += data[column_offset:column_offset + cell_count]
-            
-            out.writerow(row)
-            stdout.flush()
+    options, args = parser.parse_args()
+    
+    if options.summary_level in summary_levels:
+        options.summary_level = summary_levels[options.summary_level]
+    
+    file_name, column_offset, cell_count = file_choice(options.table, options.verbose is not False)
+    
+    if options.verbose is not False:
+        print >> stderr, options.summary_level, options.state, options.table, file_name, column_offset, cell_count
+        print >> stderr, '-' * 32
+    
+    geo_path, data_path = file_paths(options.state, file_name)
+    
+    out = options.output and open(options.output, 'w') or stdout
+    out = writer(out, dialect='excel-tab')
+    
+    row = column_names(options.wide)
+    
+    tab, pat = options.table, compile(r'^([A-Z]+)(\d+)([A-Z]*)$')
+    row += ['%s%03d%s%03d' % (pat.sub(r'\1', tab), int(pat.sub(r'\2', tab)), pat.sub(r'\3', tab), cell)
+            for cell in range(1, cell_count + 1)]
+    
+    out.writerow(row)
+    
+    for (geo, data) in izip(geo_lines(geo_path, options.verbose), data_lines(data_path, options.verbose)):
+    
+        if geo['GEOCOMP'] == '00':
+            # Geographic Component "00" means the whole thing,
+            # not e.g. "01" for urban or "43" for rural parts.
+    
+            if geo['SUMLEV'] == options.summary_level:
+                assert geo['LOGRECNO'] == data[4], 'Wah'
+                
+                row = [geo[key] for key in key_names(options.wide)]
+                row += data[column_offset:column_offset + cell_count]
+                
+                out.writerow(row)
+                stdout.flush()
