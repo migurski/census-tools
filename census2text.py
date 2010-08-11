@@ -16,7 +16,9 @@ class RemoteFileObject:
         Pull data from a remote URL with HTTP range headers.
     """
 
-    def __init__(self, url, block_size=(16 * 1024)):
+    def __init__(self, url, block_size=(16 * 1024), verbose=False):
+        self.verbose = verbose
+
         # scheme://host/path;parameters?query#fragment
         (scheme, host, path, parameters, query, fragment) = urlparse(url)
         
@@ -35,7 +37,10 @@ class RemoteFileObject:
         conn = HTTPConnection(self.host)
         conn.request('GET', self.rest, headers={'Range': '0-1'})
         length = int(conn.getresponse().getheader('content-length'))
-        print >> stderr, length, 'bytes in', basename(self.rest)
+        
+        if self.verbose:
+            print >> stderr, length, 'bytes in', basename(self.rest)
+
         return length
 
     def get_range(self, start, end):
@@ -63,8 +68,9 @@ class RemoteFileObject:
                 range = chunk_offset, min(self.length, self.offset + self.block_size) - 1
                 self.chunks[chunk_offset] = StringIO(self.get_range(*range))
                 
-                loaded = 100.0 * self.block_size * len(self.chunks) / self.length
-                print >> stderr, '%.1f%%' % min(100, loaded), 'of', basename(self.rest)
+                if self.verbose:
+                    loaded = 100.0 * self.block_size * len(self.chunks) / self.length
+                    print >> stderr, '%.1f%%' % min(100, loaded), 'of', basename(self.rest)
 
             chunk = self.chunks[chunk_offset]
             in_chunk_offset = self.offset % self.block_size
@@ -94,7 +100,7 @@ class RemoteFileObject:
     def tell(self):
         return self.offset
 
-def file_choice(table):
+def file_choice(table, verbose):
     """
     """
     file_name, column_offset = None, 5
@@ -106,16 +112,18 @@ def file_choice(table):
             file_name, column_offset = curr_file, 5
     
         if curr_table == table:
-            print >> stderr, row.get('Name'), 'in', row.get('Universe')
+            if verbose:
+                print >> stderr, row.get('Name'), 'in', row.get('Universe')
+
             return file_name, column_offset, cell_count
         
         column_offset += cell_count
 
-def geo_lines(path):
+def geo_lines(path, verbose):
     """
     """
     u = urljoin('http://www2.census.gov/census_2000/datasets/', path)
-    f = RemoteFileObject(u, 256 * 1024)
+    f = RemoteFileObject(u, 256 * 1024, verbose)
     z = ZipFile(f)
     n = z.namelist()
     
@@ -135,11 +143,11 @@ def geo_lines(path):
         
         yield data
 
-def data_lines(path):
+def data_lines(path, verbose):
     """
     """
     u = urljoin('http://www2.census.gov/census_2000/datasets/', path)
-    f = RemoteFileObject(u, 256 * 1024)
+    f = RemoteFileObject(u, 256 * 1024, verbose)
     z = ZipFile(f)
     n = z.namelist()
     
@@ -164,7 +172,7 @@ states = {'Alabama': 'AL', 'Alaska': 'AK', 'American Samoa': 'AS', 'Arizona': 'A
 
 parser = OptionParser()
 
-parser.set_defaults(summary_level='county', table='P1')
+parser.set_defaults(summary_level='county', table='P1', verbose=None, wide=None)
 
 parser.add_option('-g', '--geography', dest='summary_level',
                   help='Geographic summary level, e.g. "state", "040".',
@@ -177,15 +185,32 @@ parser.add_option('-s', '--state', dest='state',
                   help='Optional state, e.g. "Alaska", "District of Columbia".',
                   type='choice', choices=states.keys())
 
+parser.add_option('-n', '--narrow', dest='wide',
+                  help='Output fewer columns than normal',
+                  action='store_false')
+
+parser.add_option('-w', '--wide', dest='wide',
+                  help='Output more columns than normal',
+                  action='store_true')
+
+parser.add_option('-q', '--quiet', dest='verbose',
+                  help='Be quieter than normal',
+                  action='store_false')
+
+parser.add_option('-v', '--verbose', dest='verbose',
+                  help='Be louder than normal',
+                  action='store_true')
+
 options, args = parser.parse_args()
 
 if options.summary_level in summary_levels:
     options.summary_level = summary_levels[options.summary_level]
 
-file_name, column_offset, cell_count = file_choice(options.table)
+file_name, column_offset, cell_count = file_choice(options.table, options.verbose is not False)
 
-print >> stderr, options.summary_level, options.state, options.table, file_name, column_offset, cell_count
-print >> stderr, '-' * 32
+if options.verbose is not False:
+    print >> stderr, options.summary_level, options.state, options.table, file_name, column_offset, cell_count
+    print >> stderr, '-' * 32
 
 if options.state:
     dir_name = options.state.replace(' ', '_')
@@ -199,12 +224,18 @@ else:
 
 out = writer(stdout, dialect='excel-tab')
 
-row = ['Summary Level', 'Geographic Component', 'State FIPS', 'County FIPS', 'Tract', 'Block', 'Name', 'Latitude', 'Longitude']
+if options.wide is True:
+    row = ['Summary Level', 'Geographic Component', 'State FIPS', 'County FIPS', 'Tract', 'Block', 'Name', 'Latitude', 'Longitude']
+elif options.wide is False:
+    row = ['State FIPS', 'County FIPS', 'Tract', 'Block']
+else:
+    row = ['Summary Level', 'Geographic Component', 'State FIPS', 'County FIPS', 'Tract', 'Block', 'Name']
+
 row += ['%s%03d' % (options.table, cell) for cell in range(1, cell_count + 1)]
 
 out.writerow(row)
 
-for (geo, data) in izip(geo_lines(geo_path), data_lines(data_path)):
+for (geo, data) in izip(geo_lines(geo_path, options.verbose), data_lines(data_path, options.verbose)):
 
     if geo['GEOCOMP'] == '00':
         # Geographic Component "00" means the whole thing,
@@ -213,7 +244,13 @@ for (geo, data) in izip(geo_lines(geo_path), data_lines(data_path)):
         if geo['SUMLEV'] == options.summary_level:
             assert geo['LOGRECNO'] == data[4], 'Wah'
             
-            row = [geo[key] for key in ('SUMLEV', 'GEOCOMP', 'STATE', 'COUNTY', 'TRACT', 'BLOCK', 'NAME', 'LATITUDE', 'LONGITUDE')]
+            if options.wide is True:
+                row = [geo[key] for key in ('SUMLEV', 'GEOCOMP', 'STATE', 'COUNTY', 'TRACT', 'BLOCK', 'NAME', 'LATITUDE', 'LONGITUDE')]
+            elif options.wide is False:
+                row = [geo[key] for key in ('STATE', 'COUNTY', 'TRACT', 'BLOCK')]
+            else:
+                row = [geo[key] for key in ('SUMLEV', 'GEOCOMP', 'STATE', 'COUNTY', 'TRACT', 'BLOCK', 'NAME')]
+            
             row += data[column_offset:column_offset + cell_count]
             
             out.writerow(row)
