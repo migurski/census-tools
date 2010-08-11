@@ -1,5 +1,6 @@
 from sys import stdout, stderr
 from os import SEEK_SET, SEEK_CUR, SEEK_END
+from re import compile
 from csv import reader, writer, DictReader
 from os.path import basename
 from optparse import OptionParser
@@ -231,7 +232,8 @@ elif options.wide is False:
 else:
     row = ['Summary Level', 'Geographic Component', 'State FIPS', 'County FIPS', 'Tract', 'Block', 'Name']
 
-row += ['%s%03d' % (options.table, cell) for cell in range(1, cell_count + 1)]
+tab, pat = options.table, compile(r'^([A-Z]+)(\d+)([A-Z]*)$')
+row += ['%s%03d%s%03d' % (pat.sub(r'\1', tab), int(pat.sub(r'\2', tab)), pat.sub(r'\3', tab), cell) for cell in range(1, cell_count + 1)]
 
 out.writerow(row)
 
