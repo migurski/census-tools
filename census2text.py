@@ -7,6 +7,7 @@ from optparse import OptionParser
 from urlparse import urlparse, urljoin
 from cStringIO import StringIO
 from httplib import HTTPConnection
+from urllib import urlopen
 from zipfile import ZipFile
 from itertools import izip
 
@@ -17,7 +18,7 @@ class RemoteFileObject:
         Pull data from a remote URL with HTTP range headers.
     """
 
-    def __init__(self, url, block_size=(16 * 1024), verbose=False):
+    def __init__(self, url, verbose=False, block_size=(16 * 1024)):
         self.verbose = verbose
 
         # scheme://host/path;parameters?query#fragment
@@ -104,9 +105,13 @@ class RemoteFileObject:
 def file_choice(table, verbose):
     """
     """
+    url = 'http://census-tools.teczno.com/SF1.txt'
+    src = StringIO(urlopen(url).read())
+    src.seek(0)
+    
     file_name, column_offset = None, 5
     
-    for row in DictReader(open('SF1.txt', 'r'), dialect='excel-tab'):
+    for row in DictReader(src, dialect='excel-tab'):
         curr_file, curr_table, cell_count = row.get('File Name'), row.get('Matrix Number'), int(row.get('Cell Count'))
         
         if curr_file != file_name:
@@ -124,7 +129,7 @@ def geo_lines(path, verbose):
     """
     """
     u = urljoin('http://www2.census.gov/census_2000/datasets/', path)
-    f = RemoteFileObject(u, 256 * 1024, verbose)
+    f = RemoteFileObject(u, verbose, 256 * 1024)
     z = ZipFile(f)
     n = z.namelist()
     
@@ -148,7 +153,7 @@ def data_lines(path, verbose):
     """
     """
     u = urljoin('http://www2.census.gov/census_2000/datasets/', path)
-    f = RemoteFileObject(u, 256 * 1024, verbose)
+    f = RemoteFileObject(u, verbose, 256 * 1024)
     z = ZipFile(f)
     n = z.namelist()
     
