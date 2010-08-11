@@ -6,8 +6,10 @@ Run with --help flag for usage instructions.
 from sys import stdout, stderr
 from os import SEEK_SET, SEEK_CUR, SEEK_END
 from re import compile
+from time import time
 from csv import reader, writer, DictReader
 from os.path import basename
+from datetime import timedelta
 from optparse import OptionParser
 from urlparse import urlparse, urljoin
 from cStringIO import StringIO
@@ -37,6 +39,7 @@ class RemoteFileObject:
         self.chunks = {}
         
         self.block_size = block_size
+        self.start_time = time()
 
     def get_length(self):
         """
@@ -76,8 +79,12 @@ class RemoteFileObject:
                 self.chunks[chunk_offset] = StringIO(self.get_range(*range))
                 
                 if self.verbose:
-                    loaded = 100.0 * self.block_size * len(self.chunks) / self.length
-                    print >> stderr, '%.1f%%' % min(100, loaded), 'of', basename(self.rest)
+                    loaded = float(self.block_size) * len(self.chunks) / self.length
+                    expect = (time() - self.start_time) / loaded
+                    remain = max(0, int(expect * (1 - loaded)))
+                    print >> stderr, '%.1f%%' % min(100, 100 * loaded),
+                    print >> stderr, 'of', basename(self.rest),
+                    print >> stderr, 'with', timedelta(seconds=remain), 'to go'
 
             chunk = self.chunks[chunk_offset]
             in_chunk_offset = self.offset % self.block_size
