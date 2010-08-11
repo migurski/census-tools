@@ -1,3 +1,8 @@
+""" Convert remote U.S. Census 2000 data to local tab-separated text files.
+
+Run with --help flag for usage instructions.
+"""
+
 from sys import stdout, stderr
 from os import SEEK_SET, SEEK_CUR, SEEK_END
 from re import compile
@@ -176,9 +181,30 @@ states = {'Alabama': 'AL', 'Alaska': 'AK', 'American Samoa': 'AS', 'Arizona': 'A
     'Tennessee': 'TN', 'Texas': 'TX', 'Utah': 'UT', 'Vermont': 'VT', 'Virginia': 'VA',
     'Washington': 'WA', 'West Virginia': 'WV', 'Wisconsin': 'WI', 'Wyoming': 'WY'}
 
-parser = OptionParser()
+parser = OptionParser(usage="""%%prog [options]
+
+Convert remote U.S. Census 2000 data to local tab-separated text files.
+
+Complete documentation of Summary File 1 data is dense but helpful:
+  http://www.census.gov/prod/cen2000/doc/sf1.pdf
+
+See Chapter 7, page 228 for explanation of column names in output.
+
+Available table IDs:
+  http://census-tools.teczno.com/SF1-p078-82-subject-locator.pdf
+
+Available summary levels: %s.
+
+See also numeric summary levels in:
+  http://census-tools.teczno.com/SF1-p083-84-sequence-state.pdf
+  http://census-tools.teczno.com/SF1-p087-88-sequence-national.pdf
+
+""".rstrip() % ', '.join(summary_levels.keys()))
 
 parser.set_defaults(summary_level='county', table='P1', verbose=None, wide=None)
+
+parser.add_option('-o', '--output', dest='output',
+                  help='Optional output filename, stdout if omitted.')
 
 parser.add_option('-g', '--geography', dest='summary_level',
                   help='Geographic summary level, e.g. "state", "040".',
@@ -228,7 +254,8 @@ else:
     geo_path = 'Summary_File_1/0Final_National/usgeo_uf1.zip'
     data_path = 'Summary_File_1/0Final_National/us000%s_uf1.zip' % file_name
 
-out = writer(stdout, dialect='excel-tab')
+out = options.output and open(options.output, 'w') or stdout
+out = writer(out, dialect='excel-tab')
 
 if options.wide is True:
     row = ['Summary Level', 'Geographic Component', 'State FIPS', 'County FIPS', 'Tract', 'Block', 'Name', 'Latitude', 'Longitude']
