@@ -168,8 +168,8 @@ def file_paths_SF3(state, file_name):
         data_path = 'Summary_File_3/%s/%s000%s_uf3.zip' % (dir_name, state_prefix, file_name)
     
     else:
-        geo_path = 'Summary_File_3/0Final_National/usgeo_uf3.zip'
-        data_path = 'Summary_File_3/0Final_National/us000%s_uf3.zip' % file_name
+        geo_path = 'Summary_File_3/0_National/usgeo_uf3.zip'
+        data_path = 'Summary_File_3/0_National/us000%s_uf3.zip' % file_name
 
     return geo_path, data_path
 
