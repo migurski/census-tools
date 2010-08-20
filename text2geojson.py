@@ -8,7 +8,11 @@ from sys import stdin, stdout, stderr
 from csv import DictReader
 from os.path import basename
 from optparse import OptionParser
-import simplejson
+
+try:
+    import json
+except ImportError:
+    import simplejson as json
 
 def parse_float(value, precision=None):
     # XXX: this is wrong
@@ -28,7 +32,7 @@ if __name__ == '__main__':
     parser.add_option('-o', '--output', dest='output',
                       help='Optional output filename, stdout if omitted.')
     parser.add_option('-i', '--indent', dest='indent',
-                      help='Indentation string.')
+                      type='int', help='Indentation string.')
     parser.add_option('-q', '--quiet', dest='verbose',
                       help='Be quieter than normal',
                       action='store_false')
@@ -38,15 +42,13 @@ if __name__ == '__main__':
     parser.add_option('-p', '--precision', dest='precision', type='int',
                       help='Decimal precision for latitude and longitude values.')
 
-    parser.set_defaults(indent='0', precision=5)
+    parser.set_defaults(indent=0, precision=5)
 
     options, args = parser.parse_args()
 
     input = len(args) and open(args.pop(0), 'r') or stdin
     output = options.output and open(options.output, 'w') or stdout
     indent = options.indent
-    if indent.isdigit():
-        indent = int(indent) * ' '
 
     rows = DictReader(input, dialect='excel-tab')
     features = []
@@ -56,5 +58,5 @@ if __name__ == '__main__':
 
     collection = {'type': 'FeatureCollection',
                   'features': features}
-    print >> output, simplejson.dumps(collection, indent=indent)
+    print >> output, json.dumps(collection, indent=indent)
 
