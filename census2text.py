@@ -16,7 +16,6 @@ from cStringIO import StringIO
 from httplib import HTTPConnection
 from urllib import urlopen
 from zipfile import ZipFile
-from itertools import izip
 
 class RemoteFileObject:
     """ Implement enough of this to be useful:
@@ -114,10 +113,10 @@ class RemoteFileObject:
     def tell(self):
         return self.offset
 
-def file_choice(table, verbose):
+def file_choice(summary_file, table, verbose):
     """
     """
-    url = 'http://census-tools.teczno.com/SF1.txt'
+    url = 'http://census-tools.teczno.com/%s.txt' % summary_file
     src = StringIO(urlopen(url).read())
     src.seek(0)
     
@@ -137,7 +136,14 @@ def file_choice(table, verbose):
         
         column_offset += cell_count
 
-def file_paths(state, file_name):
+def file_paths(summary_file, state, file_name):
+    """
+    """
+    print 'file_paths_%s' % summary_file
+    file_paths_func = globals().get('file_paths_%s' % summary_file)
+    return file_paths_func(state, file_name)
+
+def file_paths_SF1(state, file_name):
     """
     """
     if state:
@@ -149,6 +155,21 @@ def file_paths(state, file_name):
     else:
         geo_path = 'Summary_File_1/0Final_National/usgeo_uf1.zip'
         data_path = 'Summary_File_1/0Final_National/us000%s_uf1.zip' % file_name
+
+    return geo_path, data_path
+
+def file_paths_SF3(state, file_name):
+    """
+    """
+    if state:
+        dir_name = state.replace(' ', '_')
+        state_prefix = states.get(state).lower()
+        geo_path = 'Summary_File_3/%s/%sgeo_uf3.zip' % (dir_name, state_prefix)
+        data_path = 'Summary_File_3/%s/%s000%s_uf3.zip' % (dir_name, state_prefix, file_name)
+    
+    else:
+        geo_path = 'Summary_File_3/0Final_National/usgeo_uf3.zip'
+        data_path = 'Summary_File_3/0Final_National/us000%s_uf3.zip' % file_name
 
     return geo_path, data_path
 
@@ -227,13 +248,19 @@ parser = OptionParser(usage="""%%prog [options]
 
 Convert remote U.S. Census 2000 data to local tab-separated text files.
 
-Complete documentation of Summary File 1 data is dense but helpful:
+Complete documentation of Summary File data is dense but helpful:
   http://www.census.gov/prod/cen2000/doc/sf1.pdf
 
 See Chapter 7, page 228 for explanation of column names in output.
 
-Available table IDs:
+Other summary files have similar docs:
+  http://www.census.gov/prod/cen2000/doc/sf3.pdf
+
+Available summary files: SF1, SF3.
+
+Available table IDs for each summary file:
   http://census-tools.teczno.com/SF1-p078-82-subject-locator.pdf
+  http://census-tools.teczno.com/SF3-p062-84-subject-locator.pdf
 
 Available summary levels: %s.
 
@@ -243,10 +270,14 @@ See also numeric summary levels in:
 
 """.rstrip() % ', '.join(summary_levels.keys()))
 
-parser.set_defaults(summary_level='county', table='P1', verbose=None, wide=None)
+parser.set_defaults(summary_file='SF1', summary_level='county', table='P1', verbose=None, wide=None)
 
 parser.add_option('-o', '--output', dest='output',
                   help='Optional output filename, stdout if omitted.')
+
+parser.add_option('-f', '--file', dest='summary_file',
+                  help='Optional summary file, defaults to "SF1".',
+                  type='choice', choices=('SF1', 'SF3'))
 
 parser.add_option('-g', '--geography', dest='summary_level',
                   help='Geographic summary level, e.g. "state", "040".',
@@ -282,13 +313,14 @@ if __name__ == '__main__':
     if options.summary_level in summary_levels:
         options.summary_level = summary_levels[options.summary_level]
     
-    file_name, column_offset, cell_count = file_choice(options.table, options.verbose is not False)
+    file_name, column_offset, cell_count \
+        = file_choice(options.summary_file, options.table, options.verbose is not False)
     
     if options.verbose is not False:
         print >> stderr, options.summary_level, options.state, options.table, file_name, column_offset, cell_count
         print >> stderr, '-' * 32
     
-    geo_path, data_path = file_paths(options.state, file_name)
+    geo_path, data_path = file_paths(options.summary_file, options.state, file_name)
     
     out = options.output and open(options.output, 'w') or stdout
     out = writer(out, dialect='excel-tab')
@@ -301,17 +333,31 @@ if __name__ == '__main__':
     
     out.writerow(row)
     
-    for (geo, data) in izip(geo_lines(geo_path, options.verbose), data_lines(data_path, options.verbose)):
+    data_iter = data_lines(data_path, options.verbose)
     
-        if geo['GEOCOMP'] == '00':
+    for geo in geo_lines(geo_path, options.verbose):
+        
+        if geo['SUMLEV'] != options.summary_level:
+            # This is not the summary level you're looking for.
+            continue
+
+        if geo['GEOCOMP'] != '00':
             # Geographic Component "00" means the whole thing,
             # not e.g. "01" for urban or "43" for rural parts.
+            continue
     
-            if geo['SUMLEV'] == options.summary_level:
-                assert geo['LOGRECNO'] == data[4], 'Wah'
-                
-                row = [geo[key] for key in key_names(options.wide)]
-                row += data[column_offset:column_offset + cell_count]
-                
-                out.writerow(row)
-                stdout.flush()
+        for data in data_iter:
+        
+            if geo['LOGRECNO'] != data[4]:
+                # Logical record numbers don't match, keep looking
+                continue
+
+            # A match!
+            row = [geo[key] for key in key_names(options.wide)]
+            row += data[column_offset:column_offset + cell_count]
+            
+            out.writerow(row)
+            stdout.flush()
+            
+            # Great move on to the next geo
+            break
