@@ -139,7 +139,6 @@ def file_choice(summary_file, table, verbose):
 def file_paths(summary_file, state, file_name):
     """
     """
-    print 'file_paths_%s' % summary_file
     file_paths_func = globals().get('file_paths_%s' % summary_file)
     return file_paths_func(state, file_name)
 
