@@ -176,21 +176,21 @@ def column_names(wide):
     """
     """
     if wide is True:
-        return ['Summary Level', 'Geographic Component', 'State FIPS', 'County FIPS', 'Tract', 'Block', 'Name', 'Latitude', 'Longitude']
+        return ['Summary Level', 'Geographic Component', 'State FIPS', 'County FIPS', 'Tract', 'Block', 'Name', 'Latitude', 'Longitude', 'Land Area', 'Water Area', 'Population', 'Housing Units']
     elif wide is False:
         return ['State FIPS', 'County FIPS', 'Tract', 'Block']
     else:
-        return ['Summary Level', 'Geographic Component', 'State FIPS', 'County FIPS', 'Tract', 'Block', 'Name']
+        return ['Summary Level', 'Geographic Component', 'State FIPS', 'County FIPS', 'Tract', 'Block', 'Name', 'Latitude', 'Longitude']
 
 def key_names(wide):
     """
     """
     if wide is True:
-        return ('SUMLEV', 'GEOCOMP', 'STATE', 'COUNTY', 'TRACT', 'BLOCK', 'NAME', 'LATITUDE', 'LONGITUDE')
+        return ('SUMLEV', 'GEOCOMP', 'STATE', 'COUNTY', 'TRACT', 'BLOCK', 'NAME', 'LATITUDE', 'LONGITUDE', 'AREALAND', 'AREAWATER', 'POP100', 'HU100')
     elif wide is False:
         return ('STATE', 'COUNTY', 'TRACT', 'BLOCK')
     else:
-        return ('SUMLEV', 'GEOCOMP', 'STATE', 'COUNTY', 'TRACT', 'BLOCK', 'NAME')
+        return ('SUMLEV', 'GEOCOMP', 'STATE', 'COUNTY', 'TRACT', 'BLOCK', 'NAME', 'LATITUDE', 'LONGITUDE')
 
 def geo_lines(path, verbose):
     """
@@ -202,17 +202,24 @@ def geo_lines(path, verbose):
     
     assert len(n) == 1, 'Expected one file, not %d: %s' % (len(n), repr(n))
     
-    cols = [('LATITUDE', 310, 319), ('LONGITUDE', 319, 329),
-            ('LOGRECNO', 18, 25), ('SUMLEV', 8, 11), ('GEOCOMP', 11, 13),
-            ('STATE', 29, 31), ('COUNTY', 31, 34), ('TRACT', 55, 61),
-            ('BLOCK', 62, 66), ('NAME', 200, 290)]
+    # Offsets here are one-based to match the documentation in
+    # http://census-tools.teczno.com/SF1-p015-34-geo-state.pdf
+    cols = [('LATITUDE', 311, 9), ('LONGITUDE', 320, 10),
+            ('LOGRECNO', 19, 7), ('SUMLEV', 9, 3), ('GEOCOMP', 12, 2),
+            ('STATE', 30, 2), ('COUNTY', 32, 3), ('TRACT', 56, 6),
+            ('BLOCK', 63, 4), ('NAME', 201, 90),
+            ('AREALAND', 173, 14), ('AREAWATER', 187, 14),
+            ('POP100', 293, 9), ('HU100', 302, 9)]
 
     for line in z.open(n[0]):
-        data = dict( [(key, line[s:e].strip()) for (key, s, e) in cols] )
+        data = dict( [(key, line[s-1:s-1+l].strip()) for (key, s, l) in cols] )
         
-        lat, lon = data['LATITUDE'], data['LONGITUDE']
-        data['LATITUDE'] = (lat[0] + lat[1:-6].lstrip('0') + '.' + lat[-6:]).lstrip('+')
-        data['LONGITUDE'] = (lon[0] + lon[1:-6].lstrip('0') + '.' + lon[-6:]).lstrip('+')
+        for key in ('LATITUDE', 'LONGITUDE'):
+            val = data[key]
+            data[key] = (val[0] + val[1:-6].lstrip('0') + '.' + val[-6:]).lstrip('+')
+        
+        #for key in ('AREALAND', 'AREAWATER', 'POP100', 'HU100'):
+        #    data[key] = int(data[key])
         
         yield data
 
