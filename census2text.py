@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """ Convert remote U.S. Census 2000 data to local tab-separated text files.
 
 Run with --help flag for usage instructions.
