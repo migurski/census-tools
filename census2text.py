@@ -289,6 +289,10 @@ parser.add_option('-s', '--state', dest='state',
                   help='Optional state, e.g. "Alaska", "District of Columbia".',
                   type='choice', choices=states.keys())
 
+parser.add_option('-b', '--bbox', dest='bbox',
+                  help='Optional geographic bounds: north west south east.',
+                  type='float', nargs=4)
+
 parser.add_option('-n', '--narrow', dest='wide',
                   help='Output fewer columns than normal',
                   action='store_false')
@@ -321,6 +325,12 @@ if __name__ == '__main__':
     
     geo_path, data_path = file_paths(options.summary_file, options.state, file_name)
     
+    if options.bbox is not None:
+        north = max(options.bbox[0], options.bbox[2])
+        south = min(options.bbox[0], options.bbox[2])
+        east = max(options.bbox[1], options.bbox[3])
+        west = min(options.bbox[1], options.bbox[3])
+        
     out = options.output and open(options.output, 'w') or stdout
     out = writer(out, dialect='excel-tab')
     
@@ -332,9 +342,10 @@ if __name__ == '__main__':
     
     out.writerow(row)
     
+    geo_iter = geo_lines(geo_path, options.verbose)
     data_iter = data_lines(data_path, options.verbose)
     
-    for geo in geo_lines(geo_path, options.verbose):
+    for geo in geo_iter:
         
         if geo['SUMLEV'] != options.summary_level:
             # This is not the summary level you're looking for.
@@ -344,6 +355,13 @@ if __name__ == '__main__':
             # Geographic Component "00" means the whole thing,
             # not e.g. "01" for urban or "43" for rural parts.
             continue
+
+        if options.bbox is not None:
+            lat, lon = float(geo['LATITUDE']), float(geo['LONGITUDE'])
+            
+            if lat < south or north < lat or lon < west or east < lon:
+                # This geography is outside the bounding box
+                continue
     
         for data in data_iter:
         
