@@ -8,22 +8,15 @@ from sys import stdin, stdout, stderr
 from csv import DictReader
 from os.path import basename
 from optparse import OptionParser
-
-try:
-    import json
-except ImportError:
-    import simplejson as json
-
-def parse_float(value, precision=None):
-    # XXX: this is wrong
-    return precision and round(float(value), precision) or float(value)
+from json import JSONEncoder
+from re import compile
 
 def make_feature(row, precision=None):
     return {'properties': row,
             'geometry':
             {'type': 'Point',
-             'coordinates': [parse_float(row['Longitude'], precision), 
-                             parse_float(row['Latitude'], precision)]}}
+             'coordinates': (float(row['Longitude']),
+                             float(row['Latitude']))}}
 
 if __name__ == '__main__':
 
@@ -42,21 +35,26 @@ if __name__ == '__main__':
     parser.add_option('-p', '--precision', dest='precision', type='int',
                       help='Decimal precision for latitude and longitude values.')
 
-    parser.set_defaults(indent=0, precision=5)
+    parser.set_defaults(indent=None, precision=5)
 
     options, args = parser.parse_args()
 
     input = len(args) and open(args.pop(0), 'r') or stdin
     output = options.output and open(options.output, 'w') or stdout
     indent = options.indent
-
+    
     rows = DictReader(input, dialect='excel-tab')
-    features = []
-    for row in rows:
-        feature = make_feature(row, options.precision)
-        features.append(feature)
+    features = [make_feature(row, options.precision) for row in rows]
 
     collection = {'type': 'FeatureCollection',
                   'features': features}
-    print >> output, json.dumps(collection, indent=indent)
+    
+    float_pat = compile(r'^-?\d+\.\d+$')
+    float_fmt = '%%.%df' % options.precision
+    encoded = JSONEncoder(indent=indent).iterencode(collection)
 
+    for atom in encoded:
+        if float_pat.match(atom):
+            output.write(float_fmt % float(atom))
+        else:
+            output.write(atom)
