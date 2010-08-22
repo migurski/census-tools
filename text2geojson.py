@@ -25,15 +25,15 @@ if __name__ == '__main__':
     parser.add_option('-o', '--output', dest='output',
                       help='Optional output filename, stdout if omitted.')
     parser.add_option('-i', '--indent', dest='indent',
-                      type='int', help='Indentation string.')
+                      type='int', help='Optional number of spaces to indent.')
+    parser.add_option('-p', '--precision', dest='precision', type='int',
+                      help='Optional decimal precision for degree values.')
     parser.add_option('-q', '--quiet', dest='verbose',
                       help='Be quieter than normal',
                       action='store_false')
     parser.add_option('-v', '--verbose', dest='verbose',
                       help='Be louder than normal',
                       action='store_true')
-    parser.add_option('-p', '--precision', dest='precision', type='int',
-                      help='Decimal precision for latitude and longitude values.')
 
     parser.set_defaults(indent=None, precision=5)
 
