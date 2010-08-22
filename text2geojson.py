@@ -20,7 +20,7 @@ def make_feature(row, precision=None):
 
 if __name__ == '__main__':
 
-    parser = OptionParser(usage="""%%prog [options]
+    parser = OptionParser(usage="""%prog [options]
     """)
     parser.add_option('-o', '--output', dest='output',
                       help='Optional output filename, stdout if omitted.')
