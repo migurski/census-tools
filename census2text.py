@@ -17,6 +17,7 @@ from cStringIO import StringIO
 from httplib import HTTPConnection
 from urllib import urlopen
 from zipfile import ZipFile
+from itertools import izip
 
 class RemoteFileObject:
     """ Implement enough of this to be useful:
@@ -114,64 +115,73 @@ class RemoteFileObject:
     def tell(self):
         return self.offset
 
-def file_choice(summary_file, table, verbose):
+def file_choice(summary_file, tables, verbose):
     """
     """
     url = 'http://census-tools.teczno.com/%s.txt' % summary_file
     src = StringIO(urlopen(url).read())
-    src.seek(0)
     
-    file_name, column_offset = None, 5
+    files = []
     
-    for row in DictReader(src, dialect='excel-tab'):
-        curr_file, curr_table, cell_count = row.get('File Name'), row.get('Matrix Number'), int(row.get('Cell Count'))
+    for table in tables:
+        src.seek(0)
         
-        if curr_file != file_name:
-            file_name, column_offset = curr_file, 5
-    
-        if curr_table == table:
-            if verbose:
-                print >> stderr, row.get('Name'), 'in', row.get('Universe')
-
-            return file_name, column_offset, cell_count
+        file_name, column_offset = None, 5
         
-        column_offset += cell_count
+        for row in DictReader(src, dialect='excel-tab'):
+            curr_file, curr_table, cell_count = row.get('File Name'), row.get('Matrix Number'), int(row.get('Cell Count'))
+            
+            if curr_file != file_name:
+                file_name, column_offset = curr_file, 5
+        
+            if curr_table == table:
+                if verbose:
+                    print >> stderr, table, '-', row.get('Name'), 'in', row.get('Universe')
+    
+                files.append((table, file_name, column_offset, cell_count))
+                break
+            
+            column_offset += cell_count
+        
+    return files
 
-def file_paths(summary_file, state, file_name):
+def file_paths(summary_file, state, file_names):
     """
     """
     file_paths_func = globals().get('_file_paths_%s' % summary_file)
-    return file_paths_func(state, file_name)
+    return file_paths_func(state, file_names)
 
-def _file_paths_SF1(state, file_name):
+def _file_paths_SF1(state, file_names):
     """
     """
     if state:
         dir_name = state.replace(' ', '_')
         state_prefix = states.get(state).lower()
         geo_path = 'Summary_File_1/%s/%sgeo_uf1.zip' % (dir_name, state_prefix)
-        data_path = 'Summary_File_1/%s/%s000%s_uf1.zip' % (dir_name, state_prefix, file_name)
+        data_pat = 'Summary_File_1/%s/%s000%%s_uf1.zip' % (dir_name, state_prefix)
     
     else:
         geo_path = 'Summary_File_1/0Final_National/usgeo_uf1.zip'
-        data_path = 'Summary_File_1/0Final_National/us000%s_uf1.zip' % file_name
+        data_pat = 'Summary_File_1/0Final_National/us000%s_uf1.zip'
 
-    return geo_path, data_path
+    data_paths = [(file_name, data_pat % file_name) for file_name in file_names]
+    return geo_path, dict(data_paths)
 
-def _file_paths_SF3(state, file_name):
+def _file_paths_SF3(state, file_names):
     """
     """
     if state:
         dir_name = state.replace(' ', '_')
         state_prefix = states.get(state).lower()
         geo_path = 'Summary_File_3/%s/%sgeo_uf3.zip' % (dir_name, state_prefix)
-        data_path = 'Summary_File_3/%s/%s000%s_uf3.zip' % (dir_name, state_prefix, file_name)
+        data_pat = 'Summary_File_3/%s/%s000%%s_uf3.zip' % (dir_name, state_prefix)
     
     else:
         geo_path = 'Summary_File_3/0_National/usgeo_uf3.zip'
-        data_path = 'Summary_File_3/0_National/us000%s_uf3.zip' % file_name
+        data_pat = 'Summary_File_3/0_National/us000%s_uf3.zip'
 
-    return geo_path, data_path
+    data_paths = [(file_name, data_pat % file_name) for file_name in file_names]
+    return geo_path, dict(data_paths)
 
 def column_names(wide):
     """
@@ -251,9 +261,20 @@ states = {'Alabama': 'AL', 'Alaska': 'AK', 'American Samoa': 'AS', 'Arizona': 'A
     'Tennessee': 'TN', 'Texas': 'TX', 'Utah': 'UT', 'Vermont': 'VT', 'Virginia': 'VA',
     'Washington': 'WA', 'West Virginia': 'WV', 'Wisconsin': 'WI', 'Wyoming': 'WY'}
 
-parser = OptionParser(usage="""%%prog [options]
+parser = OptionParser(usage="""%%prog [options] [list of table IDs]
 
 Convert remote U.S. Census 2000 data to local tab-separated text files.
+
+Examples:
+
+    Housing basics for counties in Rhode Island
+    census2text.py --state 'Rhode Island' H1 H3 H4
+    
+    Age breakdowns for census tracts around Oakland, CA
+    census2text.py --state California --bbox 37.86 -122.35 37.70 -122.10 --geography tract P12
+    
+    Family type and employment state for counties around New England
+    census2text.py --file SF3 --bbox 47.7 -80.7 38.4 -66.4 P44
 
 Complete documentation of Summary File data is dense but helpful:
   http://www.census.gov/prod/cen2000/doc/sf1.pdf
@@ -290,9 +311,6 @@ parser.add_option('-g', '--geography', dest='summary_level',
                   help='Geographic summary level, e.g. "state", "040".',
                   type='choice', choices=summary_levels.keys() + summary_levels.values())
 
-parser.add_option('-t', '--table', dest='table',
-                  help='Table ID, e.g. "P1", "P12A", "PCT1", "H1".')
-
 parser.add_option('-s', '--state', dest='state',
                   help='Optional state, e.g. "Alaska", "District of Columbia".',
                   type='choice', choices=states.keys())
@@ -319,20 +337,21 @@ parser.add_option('-v', '--verbose', dest='verbose',
 
 if __name__ == '__main__':
 
-    options, args = parser.parse_args()
+    options, tables = parser.parse_args()
     
     if options.summary_level in summary_levels:
         options.summary_level = summary_levels[options.summary_level]
     
-    file_name, column_offset, cell_count \
-        = file_choice(options.summary_file, options.table, options.verbose is not False)
+    files = file_choice(options.summary_file, tables, options.verbose is not False)
     
     if options.verbose is not False:
-        print >> stderr, options.summary_level, options.state, options.table, file_name, column_offset, cell_count
+        print >> stderr, options.summary_level, options.state, '-',
+        print >> stderr, ', '.join( ['%s: file %s (%d @%d)' % (tbl, fn, cc, co) for (tbl, fn, co, cc) in files] )
         print >> stderr, '-' * 32
     
-    geo_path, data_path = file_paths(options.summary_file, options.state, file_name)
-    
+    file_names = set( [file_name for (tbl, file_name, co, cc) in files] )
+    geo_path, data_paths = file_paths(options.summary_file, options.state, file_names)
+
     if options.bbox is not None:
         north = max(options.bbox[0], options.bbox[2])
         south = min(options.bbox[0], options.bbox[2])
@@ -343,15 +362,22 @@ if __name__ == '__main__':
     out = writer(out, dialect='excel-tab')
     
     row = column_names(options.wide)
+    pat = compile(r'^([A-Z]+)(\d+)([A-Z]*)$')
     
-    tab, pat = options.table, compile(r'^([A-Z]+)(\d+)([A-Z]*)$')
-    row += ['%s%03d%s%03d' % (pat.sub(r'\1', tab), int(pat.sub(r'\2', tab)), pat.sub(r'\3', tab), cell)
-            for cell in range(1, cell_count + 1)]
+    for (table, fn, co, cell_count) in files:
+        row += ['%s%03d%s%03d' % (pat.sub(r'\1', table), int(pat.sub(r'\2', table)), pat.sub(r'\3', table), cell)
+                for cell in range(1, cell_count + 1)]
     
     out.writerow(row)
     
+    file_iters = {}
+    
+    for (tbl, file_name, co, cc) in files:
+        if file_name not in file_iters:
+            file_iters[file_name] = data_lines(data_paths[file_name], options.verbose)
+    
+    file_names = sorted(file_iters.keys())
     geo_iter = geo_lines(geo_path, options.verbose)
-    data_iter = data_lines(data_path, options.verbose)
     
     for geo in geo_iter:
         
@@ -371,18 +397,27 @@ if __name__ == '__main__':
                 # This geography is outside the bounding box
                 continue
     
-        for data in data_iter:
+        row = [geo[key] for key in key_names(options.wide)]
         
-            if geo['LOGRECNO'] != data[4]:
+        data_iters = izip(*[file_iters[file_name] for file_name in file_names])
+        
+        for data_lines in data_iters:
+            
+            file_data = dict(zip(file_names, data_lines))
+            
+            logrecno_matches = [geo['LOGRECNO'] == data[4] for data in file_data.values()]
+            
+            if False in logrecno_matches:
                 # Logical record numbers don't match, keep looking
                 continue
 
             # A match!
-            row = [geo[key] for key in key_names(options.wide)]
-            row += data[column_offset:column_offset + cell_count]
-            
-            out.writerow(row)
-            stdout.flush()
+            for (tbl, file_name, column_offset, cell_count) in files:
+                data = file_data[file_name]
+                row += data[column_offset:column_offset + cell_count]
             
             # Great move on to the next geo
             break
+        
+        out.writerow(row)
+        stdout.flush()
