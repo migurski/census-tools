@@ -187,21 +187,21 @@ def column_names(wide):
     """
     """
     if wide is True:
-        return ['Summary Level', 'Geographic Component', 'State FIPS', 'County FIPS', 'Tract', 'Block', 'Name', 'Latitude', 'Longitude', 'Land Area', 'Water Area', 'Population', 'Housing Units']
+        return ['Summary Level', 'Geographic Component', 'State FIPS', 'Place FIPS', 'County FIPS', 'Tract', 'Block', 'Name', 'Latitude', 'Longitude', 'Land Area', 'Water Area', 'Population', 'Housing Units']
     elif wide is False:
-        return ['State FIPS', 'County FIPS', 'Tract', 'Block']
+        return ['State FIPS', 'Place FIPS', 'County FIPS', 'Tract', 'Block']
     else:
-        return ['Summary Level', 'Geographic Component', 'State FIPS', 'County FIPS', 'Tract', 'Block', 'Name', 'Latitude', 'Longitude']
+        return ['Summary Level', 'Geographic Component', 'State FIPS', 'Place FIPS', 'County FIPS', 'Tract', 'Block', 'Name', 'Latitude', 'Longitude']
 
 def key_names(wide):
     """
     """
     if wide is True:
-        return ('SUMLEV', 'GEOCOMP', 'STATE', 'COUNTY', 'TRACT', 'BLOCK', 'NAME', 'LATITUDE', 'LONGITUDE', 'AREALAND', 'AREAWATER', 'POP100', 'HU100')
+        return ('SUMLEV', 'GEOCOMP', 'STATE', 'PLACE', 'COUNTY', 'TRACT', 'BLOCK', 'NAME', 'LATITUDE', 'LONGITUDE', 'AREALAND', 'AREAWATER', 'POP100', 'HU100')
     elif wide is False:
-        return ('STATE', 'COUNTY', 'TRACT', 'BLOCK')
+        return ('STATE', 'PLACE', 'COUNTY', 'TRACT', 'BLOCK')
     else:
-        return ('SUMLEV', 'GEOCOMP', 'STATE', 'COUNTY', 'TRACT', 'BLOCK', 'NAME', 'LATITUDE', 'LONGITUDE')
+        return ('SUMLEV', 'GEOCOMP', 'STATE', 'PLACE', 'COUNTY', 'TRACT', 'BLOCK', 'NAME', 'LATITUDE', 'LONGITUDE')
 
 def geo_lines(path, verbose):
     """
@@ -217,7 +217,7 @@ def geo_lines(path, verbose):
     # http://census-tools.teczno.com/SF1-p015-34-geo-state.pdf
     cols = [('LATITUDE', 311, 9), ('LONGITUDE', 320, 10),
             ('LOGRECNO', 19, 7), ('SUMLEV', 9, 3), ('GEOCOMP', 12, 2),
-            ('STATE', 30, 2), ('COUNTY', 32, 3), ('TRACT', 56, 6),
+            ('STATE', 30, 2), ('PLACE', 46, 5), ('COUNTY', 32, 3), ('TRACT', 56, 6),
             ('BLOCK', 63, 4), ('NAME', 201, 90),
             ('AREALAND', 173, 14), ('AREAWATER', 187, 14),
             ('POP100', 293, 9), ('HU100', 302, 9)]
@@ -247,7 +247,7 @@ def data_lines(path, verbose):
     for row in reader(z.open(n[0])):
         yield row
 
-summary_levels = {'state': '040', 'county': '050', 'tract': '080', 'block': '101'}
+summary_levels = {'state': '040', 'county': '050', 'tract': '080', 'block': '101', 'place': '160'}
 states = {'Alabama': 'AL', 'Alaska': 'AK', 'American Samoa': 'AS', 'Arizona': 'AZ',
     'Arkansas': 'AR', 'California': 'CA', 'Colorado': 'CO', 'Connecticut': 'CT', 'Delaware': 'DE',
     'District of Columbia': 'DC', 'Florida': 'FL', 'Georgia': 'GA', 'Hawaii': 'HI', 'Idaho': 'ID',
