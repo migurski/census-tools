@@ -187,21 +187,21 @@ def column_names(wide):
     """
     """
     if wide is True:
-        return ['Summary Level', 'Geographic Component', 'State FIPS', 'Place FIPS', 'County FIPS', 'Tract', 'Block', 'Name', 'Latitude', 'Longitude', 'Land Area', 'Water Area', 'Population', 'Housing Units']
+        return ['Summary Level', 'Geographic Component', 'State FIPS', 'Place FIPS', 'County FIPS', 'Tract', 'Zip', 'Block', 'Name', 'Latitude', 'Longitude', 'Land Area', 'Water Area', 'Population', 'Housing Units']
     elif wide is False:
-        return ['State FIPS', 'Place FIPS', 'County FIPS', 'Tract', 'Block']
+        return ['State FIPS', 'Place FIPS', 'County FIPS', 'Tract', 'Zip', 'Block']
     else:
-        return ['Summary Level', 'Geographic Component', 'State FIPS', 'Place FIPS', 'County FIPS', 'Tract', 'Block', 'Name', 'Latitude', 'Longitude']
+        return ['Summary Level', 'Geographic Component', 'State FIPS', 'Place FIPS', 'County FIPS', 'Tract', 'Zip', 'Block', 'Name', 'Latitude', 'Longitude']
 
 def key_names(wide):
     """
     """
     if wide is True:
-        return ('SUMLEV', 'GEOCOMP', 'STATE', 'PLACE', 'COUNTY', 'TRACT', 'BLOCK', 'NAME', 'LATITUDE', 'LONGITUDE', 'AREALAND', 'AREAWATER', 'POP100', 'HU100')
+        return ('SUMLEV', 'GEOCOMP', 'STATE', 'PLACE', 'COUNTY', 'TRACT', 'ZCTA5', 'BLOCK', 'NAME', 'LATITUDE', 'LONGITUDE', 'AREALAND', 'AREAWATER', 'POP100', 'HU100')
     elif wide is False:
-        return ('STATE', 'PLACE', 'COUNTY', 'TRACT', 'BLOCK')
+        return ('STATE', 'PLACE', 'COUNTY', 'TRACT', 'ZCTA5', 'BLOCK')
     else:
-        return ('SUMLEV', 'GEOCOMP', 'STATE', 'PLACE', 'COUNTY', 'TRACT', 'BLOCK', 'NAME', 'LATITUDE', 'LONGITUDE')
+        return ('SUMLEV', 'GEOCOMP', 'STATE', 'PLACE', 'COUNTY', 'TRACT', 'ZCTA5', 'BLOCK', 'NAME', 'LATITUDE', 'LONGITUDE')
 
 def geo_lines(path, verbose):
     """
@@ -218,7 +218,7 @@ def geo_lines(path, verbose):
     cols = [('LATITUDE', 311, 9), ('LONGITUDE', 320, 10),
             ('LOGRECNO', 19, 7), ('SUMLEV', 9, 3), ('GEOCOMP', 12, 2),
             ('STATE', 30, 2), ('PLACE', 46, 5), ('COUNTY', 32, 3), ('TRACT', 56, 6),
-            ('BLOCK', 63, 4), ('NAME', 201, 90),
+            ('BLOCK', 63, 4), ('NAME', 201, 90), ('ZCTA3', 158, 3), ('ZCTA5', 161, 5),
             ('AREALAND', 173, 14), ('AREAWATER', 187, 14),
             ('POP100', 293, 9), ('HU100', 302, 9)]
 
@@ -247,7 +247,8 @@ def data_lines(path, verbose):
     for row in reader(z.open(n[0])):
         yield row
 
-summary_levels = {'state': '040', 'county': '050', 'tract': '080', 'block': '101', 'place': '160'}
+summary_levels = {'state': '040', 'county': '050', 'tract': '080', 'zip': ('860', '871'), 'block': '101', 'place': '160'}
+
 states = {'Alabama': 'AL', 'Alaska': 'AK', 'American Samoa': 'AS', 'Arizona': 'AZ',
     'Arkansas': 'AR', 'California': 'CA', 'Colorado': 'CO', 'Connecticut': 'CT', 'Delaware': 'DE',
     'District of Columbia': 'DC', 'Florida': 'FL', 'Georgia': 'GA', 'Hawaii': 'HI', 'Idaho': 'ID',
@@ -341,11 +342,14 @@ if __name__ == '__main__':
     
     if options.summary_level in summary_levels:
         options.summary_level = summary_levels[options.summary_level]
+
+    if type(options.summary_level) is not tuple:
+        options.summary_level = (options.summary_level, )
     
     files = file_choice(options.summary_file, tables, options.verbose is not False)
     
     if options.verbose is not False:
-        print >> stderr, options.summary_level, options.state, '-',
+        print >> stderr, ', '.join(options.summary_level), options.state, '-',
         print >> stderr, ', '.join( ['%s: file %s (%d @%d)' % (tbl, fn, cc, co) for (tbl, fn, co, cc) in files] )
         print >> stderr, '-' * 32
     
@@ -381,7 +385,7 @@ if __name__ == '__main__':
     
     for geo in geo_iter:
         
-        if geo['SUMLEV'] != options.summary_level:
+        if geo['SUMLEV'] not in options.summary_level:
             # This is not the summary level you're looking for.
             continue
 
